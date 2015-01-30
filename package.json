@@ -10,6 +10,7 @@
     "hexo-renderer-stylus": "*"
   },
   "scripts": {
-    "server": "hexo clean && hexo generate && hexo server"
+    "server": "hexo clean && hexo generate && hexo server",
+    "deploy": "hexo clean && hexo generate && hexo deploy"
   }
 }
