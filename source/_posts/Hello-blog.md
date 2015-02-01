@@ -4,26 +4,22 @@ categories:
 tags: []
 date: 2015-01-30 00:10:00
 ---
-Bom, porque não começar um blog sobre desenvolvimento (e experiências envolvendo o mesmo) com um clichê logo no título, não ?
-Tentativas toscas de ser engraçado a parte, irei ao assunto deste post:
+Bom, porque não começar um blog sobre desenvolvimento com um clichê logo no título, não ?
 
-1. Quem sou eu ?
-2. Porque criei este blog ?
-3. O que eu vou falar nele ?
-4. Qual a resposta pra Vida, o Universo, e tudo mais ?
+De forma breve, vamos ao assunto deste post, antes de começarmos a falar realmente sobre desenvolvimento nos próximos.
 
-<!-- more -->
-
-Respostas:
-
-1. 
+###Quem sou eu ?
 
 Eu sou o [Talysson](https://github.com/talyssonoc), mineiro (em breve residente de São Paulo), prestes a terminar o curso de Ciência da Computação na Universidade Federal de Alfenas, apaixonado por computação e JavaScript, e desenvolvedor web.
 
-2. Venho notado uma certa falta de blogs de desenvolvimento brasileiros (apesar de ter passado a conhecer alguns graças ao GitHub ! Referências a eles serão feitas ao longo dos posts). Não blogs de tecnologia, com notícias, mas blogs escritos por desenvolvedores, com suas experiências, ao estilo dos que sê surgir no HackerNews vez ou outra. Além de ter sentido falta de algum blog que me falasse sobre desenvolvimento de uma forma fácil quando estava começando.
+###Porque criei este blog ?
 
-3. Desta forma, como diz-se que precisamos ser a mudança que queremos ver no mundo, resolvi criar este blog para falar das minhas experiências, novas ferramentas que eu esteja testando, dicas de como estudar tal coisa, onde encontrar conteúdo, coisas que estou desenvolvendo no momento, dentre outras.
+Venho notado uma certa falta de blogs de desenvolvimento brasileiros (apesar de ter passado a conhecer alguns graças ao GitHub !). Falta de saber onde procurar ? Talvez.
 
-4. _42_
+De qualquer forma, é importante ressaltar que a "dificuldade" de achá-los é maior do que achar um bom blog americano deste nicho. Não blogs de tecnologia, com notícias, mas blogs escritos por desenvolvedores, com suas experiências, ao estilo dos que se vê no HackerNews, por exemplo. Além de ter sentido falta de algum blog que me falasse sobre desenvolvimento de uma forma fácil quando estava começando.
+
+###O que eu vou falar nele ?
+
+Desta forma, como diz-se que precisamos ser a mudança que queremos ver no mundo, resolvi criar este blog para falar das minhas experiências, novas ferramentas que eu esteja testando, dicas de como estudar tal coisa, onde encontrar conteúdo, coisas que estou desenvolvendo no momento, dentre outras.
 
 Sugestões de posts são __totalmente__ bem vindas, bem como correções à erros (ou coisas a adicionar) em meus posts, tanto no sentido gramatical quanto no sentido do conteúdo.

@@ -8,7 +8,7 @@ subtitle:
 description: 
 author: Talysson
 email: talyssonoc@gmail.com
-language: en
+language: pt-br
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -80,6 +80,7 @@ disqus_shortname:
 # Plugins
 plugins:
   - hexo-renderer-mathjax
+  - hexo-local-image
 
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
