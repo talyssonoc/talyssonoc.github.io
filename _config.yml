@@ -80,7 +80,6 @@ disqus_shortname: talyssonoc
 # Plugins
 plugins:
   - hexo-renderer-mathjax
-  - hexo-local-image
 
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
