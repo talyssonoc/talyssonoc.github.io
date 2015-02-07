@@ -11,11 +11,23 @@ date: 2015-02-01 17:54:00
 ---
 Boom ! De repente você quer (ou _precisa_) aprender uma nova linguagem, ou mesmo começar a programar, e não sabe por onde começar, onde procurar, como _praticar_, onde achar pessoas na mesma situação ou que já sabem o que você deseja aprender. __O que fazer ?__
 
-Neste post vou dar dicas de como aprender uma nova linguagem, onde procurar conteúdo, entre outros !
-
-<img src="/images/aprender-programar.jpg">
+Neste post vou falar um pouco sobre como aprender uma nova linguagem, onde procurar conteúdo, entre outros !
 
 <!-- more -->
+
+###_RTFM_
+
+Antes de começar a escrever códigos com uma linguagem é necessário aprender o básico da linguagem, saber a sintaxe e tudo mais, não ?
+
+<img style="width: 350px" src="http://imgs.xkcd.com/comics/rtfm.png"/>
+
+Quando se está começando com uma nova linguagem, uma ótima coisa a se fazer é primeiramente verificar se no site oficial da mesma existe um _Get started_. Esses guias costumar dar um básico, bem por cima, da linguagem, introdução da sintaxe, tipos (se a linguagem possui tipos), criação de estruturas/classes, entre outros.
+
+Após isso, pode ser uma boa procurar se o autor da linguagem, ou algum _guru_ da mesma, já lançou algo oficial sobre a linguagem.
+
+Durante o aprendizado, se algum detalhe não ficou claro no livro que você está usando, ou vídeo-aula, ou algo do tipo, você pode também olhar na API da linguagem. Um ótimo site que reúne várias APIs de linguagens e frameworks é o [OverAPI.com](http://overapi.com/).
+
+Não se esqueça de que o primeiro código desenvolvido por você na linguagem deve ser o "Olá, mundo", como descreve o item abaixo.
 
 ###Olá, mundo !
 
@@ -56,11 +68,11 @@ Um site com bons exercícios para fazer que eu costumava usar quando estava apre
 
 Quando estamos aprendendo, há sempre um ponto, uma pedra no caminho, que acabamos nos prendendo, um problema em relação à linguagem, e não à sua lógica, que te faz desanimar (ou o contrário !) ou não saber como procurar. E pior, em alguns casos parece não haver a solução em lugar algum !
 
-<a href="http://xkcd.com/979/" target="_blank"><img src="http://imgs.xkcd.com/comics/wisdom_of_the_ancients.png"/></a>
+<img style="width: 550px" src="http://imgs.xkcd.com/comics/wisdom_of_the_ancients.png"/>
 
 A dica é não se desesperar e saber onde procurar (ou perguntar) pela resposta.
 
-Eu costumo seguir a seguinte ordem quando não consigo resolver o problema:
+Eu costumo seguir a seguinte ordem quando não consigo resolver o problema usando somente o Google:
 
 1. Procurar na documentação;
 2. Procurar nos _known issues_ da linguagem para ver se não é realmente um bug;
@@ -80,3 +92,8 @@ Da mesma forma, para aprender a programar em uma linguagem, ficar bom nela, domi
 Por fim, se você conhecer alguma outra pessoa que esteja estudando a mesma linguagem, ou já saiba usá-la, converse com a pessoa sobre, discuta o porque de usar uma função ao invés de outra, como faria tal coisa na linguagem que está estudando, vai ver que só o fato de discutir já vai te ajudar bastante !
 
 Bom, são essas as minhas dicas para iniciantes na programação ou em uma nova linguagem de programação. Em breve farei um post para quem já sabe uma linguagem mas quer se aprofundar nela !
+
+Fonte das imagens:
+
+* [RTFM](http://xkcd.com/293/)
+* [Wisdom of the Ancients](http://xkcd.com/979/)
