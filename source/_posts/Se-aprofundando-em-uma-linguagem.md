@@ -1,15 +1,16 @@
-title: "We need to go deeper: Se aprofundando em uma linguagem"
-date: 2015-02-06 23:29:00
+title: 'We need to go deeper: Se aprofundando em uma linguagem'
 tags:
   - linguagens
   - intermediário
 categories:
   - Estudos
+date: 2015-02-06 23:29:00
 ---
-
 O post anterior era direcionado para pessoas que nunca programaram antes, ou que estão começando uma nova linguagem e ainda estão meio perdidas. Ele pode ter parecido meio genérico, meio _desnecessauro_, mas quando eu comecei a programar, há cerca de 6 anos atrás, eu queria muito ter encontrado algo que me direcionasse naquele começo.
 
 Este post é pra quem já sabe uma linguagem, mas quer se aprofundar mais nela, se especializar, saber usar ferramentas de apoio (como _task runners_, repositórios de pacotes...), não precisar de tutorial de tudo pra ter capacidade de criar algo com a linguagem, entre outros.
+
+<img src="https://xen-orchestra.com/blog/content/images/2014/Aug/1386271588578.jpg" />
 
 <!-- more -->
 

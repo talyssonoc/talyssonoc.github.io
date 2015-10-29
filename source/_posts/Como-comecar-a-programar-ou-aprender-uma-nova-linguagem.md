@@ -1,15 +1,16 @@
 title: Como começar a programar ou aprender uma nova linguagem
-date: 2015-02-01 17:54:00
 tags:
   - linguagens
   - iniciante
 categories:
   - Estudos
+date: 2015-02-01 17:54:00
 ---
-
 Boom! De repente você quer (ou _precisa_) aprender uma nova linguagem, ou mesmo começar sua vida na progrmaação, e não faz ideia de por onde começar, onde procurar, como _praticar_, onde achar pessoas na mesma situação ou que já sabem o que você deseja aprender. __O que fazer?__
 
 Neste post vou falar um pouco sobre como aprender uma nova linguagem, onde procurar conteúdo, entre outros!
+
+<img src="http://www.westrehab.com/wp-content/uploads/ready-set-go.jpg" />
 
 <!-- more -->
 
