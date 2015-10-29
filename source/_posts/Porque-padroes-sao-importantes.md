@@ -45,7 +45,7 @@ Conseguiu notar o quanto o uso de convenções é importante? ;)
 
 ### Generalização
 
-Seguir padrões também permite que generalização de código, que gera reaproveitamento de código, que por si gera desenvolvimento mais rápido e confiável!
+Seguir padrões também permite a generalização de código, que gera reaproveitamento de código, que por si gera desenvolvimento mais rápido e confiável!
 
 Vamos supor que sua aplicação expõe uma API. Já pensou se alguns _endpoints_ retornassem JSON e outros XML? E se alguns retornassem um JSON com uma chave `data` com um _array_ de dados, mas outras com uma chave com o nome do _resource_ que você requisitou? Não haveria um modo comum de consumir esta API, seria necessário que a requisição para cada um desses _endpoints_ fosse tratado individualmente! Isso ocasionaria em mais código a ser escrito, mais código a ser testado, e mais código a ser modificado caso toda a sua API mudasse!
 
