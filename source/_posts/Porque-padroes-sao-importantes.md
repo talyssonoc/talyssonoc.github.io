@@ -6,7 +6,6 @@ categories:
   - Porque é importante?
 date: 2015-10-28 21:26:00
 ---
-
 Primeiramente, oi de novo :)
 
 Depois de meses e meses de sumiço daqui, com vontade de voltar a escrever mas sem muita inspiração ou energia para isso, estou de volta, e espero que dessa vez eu consiga manter meu ritmo de pelo menos um post por semana.
@@ -61,9 +60,17 @@ Os _design patterns_ são soluções genéricas e reutilizáveis para problemas 
 
 Vamos supor que, por algum motivo, você quer que uma certa classe do seu projeto possa ser instanciada uma só vez e, toda vez que ela for usada, a mesma instância deve ser usada. Complicado? Simples? Independente do quão complexo você pensa ser este problema, saiba que já há um _design pattern_ que documenta como fazer isso, ele é chamado de [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern).
 
-Preferi exemplificar o _singleton_ pois ele é o mais simples de ser compreendido. Mas podemos aqui citar um outro que você possivelmente conhece, o [MVC](http://martinfowler.com/eaaCatalog/modelViewController.html)! Sim, ele também é um _design pattern_ mas que, ao contrário do _singleton_, ele foi documentado pelo desenvolvedor Martin Fowler, no livro [Patterns of Enterprise Application Architecture](http://martinfowler.com/books/eaa.html).
+Preferi exemplificar o _singleton_ pois ele é o mais simples de ser compreendido. Mas podemos aqui citar um outro que você possivelmente conhece, o [MVC](http://martinfowler.com/eaaCatalog/modelViewController.html)! Sim, ele também é um _design pattern_!
+
+O MVC foi documentado pela primeira vez em 1979 por Trygve Reenskaug e, mais tarde, num artigo de PhD de Steve Burbeck chamado "[_Applications Programming in Smalltalk-80: How to use Model–View–Controller_](http://www.math.sfedu.ru/smalltalk/gui/mvc.pdf)".
 
 É de extrema importância que você conheça a maior quantidade de _design patterns_ possível. Mesmo que não os decore, pense em procurar entre os já documentados toda vez que você cair em um problema que não consegue pensar numa boa solução, possívelmente alguém já pensou nela por você. Isso não só fará com que o desenvolvimento do seu projeto seja mais rápido, como permitirá que uma nova pessoa que entrar no projeto e já conhecer o _design pattern_ usado consiga ter uma ideia de como seu sistema funciona sem ter que escavar o código fonte todo.
+
+Dicas de boas fontes de estudo e referência sobre _design patterns_:
+
+- [Design Patterns: Elements of Reusable Object-Oriented Software](http://c2.com/cgi/wiki?DesignPatternsBook), de Erich Gamma, Richard Helm, Ralph Johnson, e John Vlissides (vulgo  Gang of Four)
+- [Patterns of Enterprise Application Architecture](http://martinfowler.com/books/eaa.html), de Martin Fowler
+- [Refactoring To Patterns](http://martinfowler.com/books/r2p.html), de Joshua Kerievsky
 
 ### Conclusão
 
