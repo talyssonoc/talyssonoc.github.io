@@ -79,11 +79,11 @@ markdown:
 		typographer: true
 	plugins:
 	anchors:
-	    level: 2
-	    collisionSuffix: 'v'           
-	    permalink: false              
-	    permalinkClass: header-anchor 
-	    permalinkSymbol: "#"
+    level: 2
+    collisionSuffix: 'v'           
+    permalink: false              
+    permalinkClass: header-anchor 
+    permalinkSymbol: "#"
 
 # Pagination
 index_generator:
@@ -93,7 +93,9 @@ index_generator:
 disqus_shortname: talyssonoc
 
 # Extensions
+
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
+
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
 theme: jacman
 exclude_generator:
