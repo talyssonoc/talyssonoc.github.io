@@ -8,7 +8,7 @@ categories:
 date: 2015-10-29 23:33:00
 toc: false
 ---
-Decidi começar a publicar um `Links da semana` toda sexta agora, com links interessantes que vi durante a semana, envolvendo desenvolvimento, conceitos, e tudo que possa rodear o mundo de um desenvolvedor, não necessariamente envolvendo programação.
+Decidi começar a publicar um `Links da semana` toda sexta agora, com links interessantes que vi durante a semana, envolvendo desenvolvimento, conceitos, e tudo que possa rodear o mundo de um desenvolvedor, não necessariamente envolvendo programação.
 
 Bom, vamos lá!
 
