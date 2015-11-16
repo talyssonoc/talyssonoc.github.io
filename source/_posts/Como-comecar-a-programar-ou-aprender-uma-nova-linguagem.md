@@ -40,7 +40,7 @@ console.log('Olá, mundo!');
 
 Sim, simples assim! Em todo tutorial, apostila, livro ou documentação decente de uma linguagem, você será apresentado ao "Olá, mundo" da mesma. Como eu disse ali em cima, logo após escrever (não vale copiar e colar!) seu programa inicial, tente entendê-lo, procurar no Google as funções e _features_ da linguagem que usou nele.
 
-Caso queira ver exemplos de "Olá, mundo" em outras linguagens, a Wikipédia possui uma [lista de programas "Olá, mundo"](http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples).
+Caso queira ver exemplos de "Olá, mundo" em outras linguagens, existe um site chamado [The Hello World Collection](http://helloworldcollection.de/) que possui dezenas de implementações.
 
 ### Algoritmos clichê
 

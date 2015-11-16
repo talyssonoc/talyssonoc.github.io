@@ -2,7 +2,6 @@ title: Porque comunicação é importante?
 tags:
   - comunicação
   - bug report
-  - expectativa
 categories:
   - Porque é importante?
 date: 2015-11-01 01:15:00
