@@ -7,14 +7,13 @@ tags:
   - responsividade
   - tipografia
   - ux
-  - biblioteca
 categories:
   - Links da semana
-date: 2015-11-19 06:49:00
+date: 2015-11-19 07:20:00
 ---
 Bom, pessoal, depois desta semana corrida, com direito à feriado amanhã pra compensar (pra alguns :P), vamos aos links da semana do dia 19/11!
 
-- [Butterick’s Practical Typography](http://practicaltypography.com/): Este link foi sugestão do [Bruno](http://brunoskonrad.github.io/), e possui diversas informações sobre tipografia, muito útil se você é um designer ou quer se aprofundar em design, abrangendo desde composição, até formatação e e layout. 
+- [Butterick’s Practical Typography](http://practicaltypography.com/): Este link foi sugestão do [Bruno](http://brunoskonrad.github.io/), e possui diversas informações sobre tipografia, muito útil se você é um designer ou quer se aprofundar em design, abrangendo desde composição, até formatação e layout. 
 - [Misused mobile UX patterns](https://medium.com/@kollinz/misused-mobile-ux-patterns-84d2b6930570): Este post mostra vários padrões de design/UX usados de maneira errada pelo pessoal de mobile, explicando porque são más práticas e mostrando melhores alternativas.
 - [10 Habits of a Happy Node Hacker (2016)](http://blog.heroku.com/archives/2015/11/10/node-habits-2016): Este post do pessoal da Heroku mostra uma lista de 10 itens que todo desenvolvedor Node deve ter como hábito para desenvolver melhores aplicações.
 - [Anatomy of a large Angular application](https://medium.com/@bojzi/anatomy-of-a-large-angular-application-f098e5e36994): Aprenda neste post como arquiteturar uma aplicação Angular de grande escala, sem cair nos problemas que o Angular costuma implicar quando o app começa a crescer.
