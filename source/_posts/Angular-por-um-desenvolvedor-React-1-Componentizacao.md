@@ -55,7 +55,7 @@ class MyPage {
         this.template = '<div>Hello, {{ ctrl.name | uppercase }}</div>';
     }
 }
-app.directive('myPage', (args) => new MyPage(...args));
+app.directive('myPage', (...args) => new MyPage(...args));
 
 // MyController.js
 class MyController {
@@ -92,7 +92,6 @@ Veja abaixo como ficaria uma diretiva de um componente burro:
 
 ```js
 // Greet.js
-
 class Greet {
 	constructor() {
     	this.restrict = 'E';
@@ -111,10 +110,9 @@ class Greet {
             </div>`;
     }
 }
-app.directive('greet', (args) => new Greet(...args));
+app.directive('greet', (...args) => new Greet(...args));
 
 // GreetController.js
-
 class GreetController {
 	upperName() {
     	return this.name.toUpperCase();
@@ -133,23 +131,22 @@ Este é um exemplo besta, que não demonstra bem o poder do uso de componentes b
 
 Além do mais, notou que agora, sem usar `$scope`, testar o controller destas nossas diretivas testa __realmente__ o controller, e não o `$scope` que ele tem acesso?
 
-### Componentes helpers
+### Componentes helpers/diretivas
 
 Estes componentes são bem diferentes dos citados anteriormente. Estes terão acesso ao `$scope` (apesar de que vão usá-los somente para escrita, __nunca__ para leitura internamente). Além do fato que em alguns apps a existência deste tipo de componente pode não se fazer necessária.
 
-Uma outra forma de ver estes componentes é tê-los como _mixins_. Eles são usados para isolar-se lógicas que são usadas em mais de um componente. Confuso? Você já vai entender.
+Uma outra forma de ver estes componentes é tê-los como _mixins_. Eles são usados para isolar-se lógicas que são usadas em mais de um componente. De maneira geral, vou chamá-los apenas de diretivas. Confuso? Você já vai entender.
 
-Vamos dizer que você está escrevendo um blog, e quer que em várias páginas você acessará informações do blog em si (como o nome do blog, todos os autores e afins). Não fica meio repetitivo escrever o _fetch_ destes dados toda vez no controller da diretiva da sua página? Ok, podemos isolar esta lógica numa factory/provider/service. Mas, ainda assim, não fica repetitivo injetar a mesma factory/provider/service no controller da página? Minha solução pra isso foi criar os componentes helpers.
+Vamos dizer que você está escrevendo um blog, e quer que em várias páginas você acessará informações do blog em si (como o nome do blog, todos os autores e afins). Não fica meio repetitivo escrever o _fetch_ destes dados toda vez no controller da diretiva da sua página? Ok, podemos isolar esta lógica numa factory/provider/service. Mas, ainda assim, não fica repetitivo injetar a mesma factory/provider/service no controller da página? Minha solução pra isso foi criar as diretivas.
 
 Estes componentes, diferentemente dos anteriores, são do tipo `A`. O que significa que você os usará como atributos. E mais, eles não terão um escopo isolado.
 
-Cada componente helper adicionará ao escopo de onde foi adicionado somente __uma__ variável, com o seu nome, numa espécie de namespace. Dentro desta variável ele deixará acessível _funções_ e atributos para serem usados dentro do escopo em que a diretiva foi inserida. Estas funções devem ser [funções puras](https://en.wikipedia.org/wiki/Pure_function), de modo que os componentes não criem dependência com a lógica usada dentro do helper. Caso for alguma dependência de lógica (por exemplo, um cálculo que vai ser usado em vários lugares do sistema), aí sim isso deve ser isolado em uma factory/provider/service.
+Cada diretiva adicionará ao escopo de onde foi adicionado somente __uma__ variável, com o seu nome, numa espécie de namespace. Dentro desta variável ele deixará acessível _funções_ e atributos para serem usados dentro do escopo em que a diretiva foi inserida. Estas funções devem ser [funções puras](https://en.wikipedia.org/wiki/Pure_function), de modo que os componentes não criem dependência com a lógica usada dentro da diretiva. Caso for alguma dependência de lógica (por exemplo, um cálculo que vai ser usado em vários lugares do sistema), aí sim isso deve ser isolado em uma factory/provider/service.
 
 Ainda confuso? Vamos a um exemplo:
 
 ```js
 // Blog.js
-
 class Blog {
 	constructor() {
     	this.restrict = 'A';
@@ -158,12 +155,11 @@ class Blog {
         this.controllerAs = 'blog'; // note que aqui não é 'ctrl'
     }
 }
-app.directive('blog', (args) => new Blog(...args));
+app.directive('blog', (...args) => new Blog(...args));
 
 // BlogController.js
-
 class BlogController {
-	strict $inject = ['$scope'];
+	static $inject = ['$scope'];
     
     constructor($scope) {
     	this.data = $scope.blog = {};
@@ -188,9 +184,11 @@ this.template = `
     </div>`;
 ```
 
-Uma função exportada por um componente helper __nunca__ deve modificar seus parâmetros, caso houver algum.
+Uma função exportada por uma diretiva __nunca__ deve modificar seus parâmetros, caso houver algum.
 
 Bom, como um desenvolvedor React, minha primeira impressão de um modo bom para se usar o Angular foi pensar no modo de componentização. Espero que tenham gostado deste primeiro post sobre o assunto!
+
+O código para este primeiro post se encontra no repositório [talyssonoc/componentized-angular](https://github.com/talyssonoc/componentized-angular/tree/componentization). Você notará que ele está um pouco mais lapidado e ainda não está usando o router (ele foi citado no post para mostrar o motivo de porque uma página também deve ser escrita com uma diretiva), resta a você dar uma explorada no repositório! (Repare que o link é para o primeiro release, que corresponde à este primeiro post).
 
 Sinta-se livre para comentar sobre algo que deixei passar, principalmente se você tem mais experiência com Angular e sabe que algo do que foi descrito acima tem potencial para dar problemas futuros, ou até mesmo sobre algum _typo_ que cometi ao longo do post.
 
