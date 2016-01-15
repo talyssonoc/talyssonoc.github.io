@@ -39,7 +39,7 @@ Após a adoção de uma ferramenta assim, usá-la corretamente e de suma import�
 
 ### Não seja um idiota
 
-Emprestando o tempo usado como título de códigos de condutas de conferências, a regra também deve se aplicar quando você está tenso seu código revisado/criticado ou revisando/criticando: não seja um idiota.
+Emprestando o tempo usado como título de códigos de condutas de conferências, a regra também deve se aplicar quando você está tendo seu código revisado/criticado ou revisando/criticando: não seja um idiota.
 
 Inicialmente, que fique claro que não passei por nada do tipo em projetos recentes.
 
