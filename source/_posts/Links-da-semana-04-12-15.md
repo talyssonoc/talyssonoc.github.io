@@ -9,6 +9,7 @@ tags:
 categories:
   - Links da semana
 date: 2015-12-04 08:44:00
+toc: false
 ---
 Vamos aos links da primeira semana do último mês do ano!
 

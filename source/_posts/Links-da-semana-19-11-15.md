@@ -10,6 +10,7 @@ tags:
 categories:
   - Links da semana
 date: 2015-11-19 07:20:00
+toc: false
 ---
 Bom, pessoal, depois desta semana corrida, com direito à feriado amanhã pra compensar (pra alguns :P), vamos aos links da semana do dia 19/11!
 

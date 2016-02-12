@@ -6,6 +6,7 @@ tags:
 categories:
   - Links da semana
 date: 2015-12-11 08:57:00
+toc: false
 ---
 Vamos aos links da semana do dia 11/12!
 

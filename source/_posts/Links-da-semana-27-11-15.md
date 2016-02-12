@@ -8,6 +8,7 @@ tags:
 categories:
   - Links da semana
 date: 2015-11-27 08:36:00
+toc: false
 ---
 Bom, links da semana do dia 27/11, a última do mês!
 
