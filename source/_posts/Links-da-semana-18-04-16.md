@@ -14,5 +14,6 @@ Vamos aos links da semana do dia 18/04, que está cheio de JavaScript!
 - [React v15](https://facebook.github.io/react/blog/2016/04/07/react-v15.html): A tão esperada versão 15 do React finalmente teve seu _release_! Clique no link e confira mais sobre esta versão :D
 - [Tracking unhandled rejected Promises](http://www.2ality.com/2016/04/unhandled-rejections.html): Saiba como lidar com _promises_ cuja rejeição não é tratada.
 - [Functional Reactive Grame Programming - RxJS Breakout](https://manu.ninja/functional-reactive-game-programming-rxjs-breakout): Um post sobre desenvolvimento de jogos com RxJS, com um exemplo desenvolvendo o jogo _Breakout_, um case bem diferente para esta biblioteca.
+- [Bublé](https://www.npmjs.com/package/buble): O Bublé é um "concorrente" do Babel, porém com o enfoque bem diferente (antes que comece aquele papinho de _JavaScript Fatigue_). O Bublé, diferentemente do Babel, não é expansível (não suporta plugins), não tenta ser 100% _compliant_ com a _spec_ do EcmaScript, e compila apenas ES2015 (sem _stage 0_, JSX e coisas assim pra você). Ainda assim, vale a pena conhecer, dado que pelos motivos acima ele é bem mais rápido e leve.
 
 Bom, foi isso, até a próxima!
