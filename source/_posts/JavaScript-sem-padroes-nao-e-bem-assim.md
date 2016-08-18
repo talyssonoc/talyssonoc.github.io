@@ -4,7 +4,6 @@ tags:
   - nodejs
 categories:
   - Discussões
-  - Indicando
 date: 2016-03-28 08:44:00
 ---
 Antes de explicar do que se trata este post, me sinto na necessidade de falar do que _não se trata_ este post. Este não é um post sobre usar ponto-e-vírgula ou não (para este assunto você pode ver [aqui](https://brendaneich.com/2012/04/the-infernal-semicolon/), [aqui](https://github.com/twbs/bootstrap/issues/3057), [aqui](https://github.com/feross/standard/issues/78), [aqui](https://twitter.com/brendaneich/status/626224324731518976), [aqui](https://github.com/airbnb/javascript), [aqui](http://javascript.crockford.com/code.html), [aqui](https://contribute.jquery.org/style-guide/js/), [aqui](https://google.github.io/styleguide/javascriptguide.xml) ou aq... chega, né?). Este post também não é sobre qual framework MVC/MVP/MVVC/Flux/CQRS você deve usar (mas espere para ver uma pincelada não-polêmica sobre  assunto no final do post).
