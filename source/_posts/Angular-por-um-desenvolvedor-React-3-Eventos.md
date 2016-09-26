@@ -10,7 +10,7 @@ O Angular, como diz a [própria documentação](https://docs.angularjs.org/guide
 
 O problema é que ainda assim as pessoas costumam esquecer a importância de usar _código declarativo_ e o código da sua aplicação acaba perdendo um pouco da sua expressividade. Quer um exemplo? O excessivo uso da função [link](https://docs.angularjs.org/api/ng/service/$compile#-link-) quando cria-se uma diretiva!
 
-Em mais este post da série [Angular por um desenvolvedor React](http://talyssonoc.github.io/categories/Angular-por-um-desenvolvedor-React/) vou discutir um pouco sobre como acho que devam ser usados os eventos dentro do Angular dado meu _background_ com desenvolvimento com o React.
+Neste post da série [Angular por um desenvolvedor React](http://talyssonoc.github.io/categories/Angular-por-um-desenvolvedor-React/) vou discutir um pouco sobre como acho que devam ser usados os eventos dentro do Angular dado meu _background_ com desenvolvimento com o React.
 
 <img src="https://angularjs.org/img/AngularJS-large.png"/>
 
@@ -18,13 +18,13 @@ Em mais este post da série [Angular por um desenvolvedor React](http://talysson
 
 Uma das bases da expressividade de um código escrito usando Angular reside no fato de que você pode programar diretamente no HTML, através de tags e diretivas. Algo que chega até a ser curioso: quando o código coloca HTML no JavaScript, como faz o React, dizem ser loucura e mistura de conceitos; quando coloca-se JavaScript no HTML, como faz o Angular, chamam de "maior expressividade do template", vai entender.
 
-Existem diversas diretivas que existem para permitir que você trabalhe com eventos dentro do seu template. Atente-se ao fato que "evento" neste post diz respeito à eventos do DOM, como _click_, _submit_, entre outros. Estas diretivas cortam a necessidade de cerca de 95% dos casos onde as pessoas costumam usar a função `link`. Então, assim como no primeiro post da série nós paramos de usar o `$scope`, neste post vamos parar de usar mais uma outra coisa:
+Existem diversas diretivas que permitem que você trabalhe com eventos dentro do seu template. Atente-se ao fato que "evento" neste post diz respeito à eventos do DOM, como _click_, _submit_, entre outros. Estas diretivas cortam a necessidade de cerca de 95% dos casos onde as pessoas costumam usar a função `link` (fonte desta estatística: minha imaginação fértil). Então, assim como paramos de usar o `$scope` no primeiro post da série, neste post vamos parar de usar mais uma outra coisa:
 
-### Abolir a função `link`
+### Abolir a função link
 
 Talvez pareça radical demais, loucura demais. Mas vamos começar com a premissa de __nunca__ usar a função `link`. Eu sei que você vai arrumar um jeito de encontrar casos em que é extremamente necessário. Para estes casos também temos um jeito, mas deixemos eles de lado por enquanto e vamos para os casos mais comuns.
 
-Caso você não saiba, a opção `link` de uma diretiva especifica uma função que te dá acesso ao elemento do DOM em que a diretiva está, comumente usado para adicionar _event listeners_ aos elementos. Notou aí o problema com a expressividade? Se você coloca os seus _listeners_ somente dentro da função `link` seu código perde uma parte da expressividade. Ao olhar o template da sua diretiva, um usuário não saberá os eventos que acontecem por ali.
+Caso você não saiba, a função `link` de uma diretiva especifica uma função que te dá acesso ao elemento do DOM em que a diretiva está montada, comumente usado para adicionar _event listeners_ aos elementos. Notou aí o problema com a expressividade? Se você coloca os seus _listeners_ somente dentro da função `link` seu código perde uma parte da expressividade. Ao olhar o template da sua diretiva, um usuário não saberá os eventos que acontecem por ali.
 
 Portanto vamos lá: abolindo a função `link`!
 
@@ -80,7 +80,7 @@ Notou a quantidade de diretivas para eventos do DOM que você já tem por padrã
 // ElementDirective.js
 // ...
 link: function(scope, element, attrs, controller) {
-	$(element)
+	element
     .find('.my-button')
     .on('click', function(e) {
     	controller.handleClick(e);
@@ -103,7 +103,7 @@ E agora um código usando somente diretivas:
 </div>
 ```
 
-Notou como o segundo é mais claro para quem lê o código do template? E mais! Possuir código que delega um evento do DOM para um método do _controller_ da sua diretiva diminui a quantidade de código não testado (já que a função `link` raramente é restada), aumentando seu _code coverage_ se o método no seu controller possuir teste para ele.
+Notou como o segundo é mais claro para quem lê o código do template? E mais! Possuir código que delega um evento do DOM para um método do _controller_ da sua diretiva diminui a quantidade de código não testado (já que a função `link` raramente é testada), aumentando seu _code coverage_ se o método no seu controller for coberto por testes.
 
 Caso você esteja acompanhando a série de posts também pelo repositório no Github, veja aqui um exemplo de [código declarativo com evento](https://github.com/talyssonoc/componentized-angular/blob/master/app/client/js/components/name-input/name-input.html#L2).
 
@@ -129,4 +129,4 @@ Este post é bem curto mas a ideia dele é ir direto ao ponto: tenha o código p
 
 Permitir que a pessoa que lê seu código entenda-o mesmo quando vê somente o template significa que seu código está bem mais legível e expressivo, e aproveita uma feature bastante importante do Angular.
 
-Qualquer sugestão, crítica ou algo do gênero, é só clicar ali em baixo!
+Qualquer sugestão, crítica ou algo do gênero, é só comentar ali em baixo!

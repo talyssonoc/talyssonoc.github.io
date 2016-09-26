@@ -6,7 +6,7 @@ categories:
   - Angular por um desenvolvedor React
 date: 2015-11-30 08:30:00
 ---
-Quando ouvi falar do Angular pela primeira vez, achei que a ideia era genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, lendo reviews de programadores influentes que usaram, acabei mudando de ideia.
+Quando ouvi falar do Angular pela primeira vez achei a ideia genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, lendo reviews de programadores influentes que usaram, acabei mudando de ideia.
 
 Com o React foi exatamente o contrário. A primeira vista achei estranho, simples demais, e JSX me parecia uma maluquice. Porém com o tempo fui notando o potencial que a biblioteca tinha, principalmente com a capacidade de permitir _serverside rendering_ e virei fã.
 
@@ -133,7 +133,7 @@ Além do mais, notou que agora, sem usar `$scope`, testar o controller destas no
 
 ### Componentes helpers/diretivas
 
-Estes componentes são bem diferentes dos citados anteriormente. Estes terão acesso ao `$scope` (apesar de que vão usá-los somente para escrita, __nunca__ para leitura internamente). Além do fato que em alguns apps a existência deste tipo de componente pode não se fazer necessária.
+Estes componentes são bem diferentes dos citados anteriormente. Estes terão acesso ao `$scope` (apesar de que vão usá-los somente para escrita, __nunca__ para leitura internamente). Além do fato que em alguns apps a existência deste tipo de componente pode nem ser necessária.
 
 Uma outra forma de ver estes componentes é tê-los como _mixins_. Eles são usados para isolar-se lógicas que são usadas em mais de um componente. De maneira geral, vou chamá-los apenas de diretivas. Confuso? Você já vai entender.
 

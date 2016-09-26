@@ -13,7 +13,7 @@ Se tem uma coisa que aumenta a barreira de entrada para o mundo JavaScript é a 
 <blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">Marc was almost ready to implement his &quot;hello world&quot; React app <a href="https://t.co/ptdg4yteF1">pic.twitter.com/ptdg4yteF1</a></p>&mdash; Thomas Fuchs (@thomasfuchs) <a href="https://twitter.com/thomasfuchs/status/708675139253174273">12 de março de 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Pensando nisso, eu resolvi fazer uma série de posts sobre como escolher a ferramenta certa na hora de prototipar uma aplicação ou quando se está estudando algo novo, ferramentas de fácil (ou nenhuma) configuração, começando por um dos tipos mais imprescindíveis quando se trata de front-end: os [_module bundlers_](/2015/12/08/Porque-tooling-e-importante/#transpilers-preprocessors-e-bundlers)!
+Pensando nisso, resolvi fazer uma série de posts sobre como escolher a ferramenta certa na hora de prototipar uma aplicação ou quando se está estudando algo novo, ferramentas de fácil (ou nenhuma) configuração, começando por um dos tipos mais imprescindíveis quando se trata de front-end: os [_module bundlers_](/2015/12/08/Porque-tooling-e-importante/#transpilers-preprocessors-e-bundlers)!
 
 <!-- more -->
 
@@ -21,7 +21,7 @@ Pensando nisso, eu resolvi fazer uma série de posts sobre como escolher a ferra
 
 Quando se trata de _module bundlers_, hoje em dia o hype é usar Webpack. Em posts sobre [tooling](/2015/12/08/Porque-tooling-e-importante/) pela internet a fora, o Webpack (e, algumas vezes, o Rollup) é o aclamado. Porém, raramente estes posts citam a dificuldade de se escrever um arquivo de configuração do Webpack. Vamos concordar, você pode muito bem começar com um arquivo vindo de um boilerplate e usá-lo por um tempo, mas não seria interessante já começar conhecendo as ferramentas que você está usando? Ou, melhor ainda, começar usando uma ferramenta que dispensa configurações?
 
-Imagine você, recém entusiasta de React. Vai precisar configurar o Babel para compilar seu JSX (que, possivelmente no começo você ainda nem sabe do que se tratam estes dois!), precisar configurar o loader do Babel para o Webpack para que seu navegador consiga entender módulos do Node. Sem contar que, se quiser aprender a escrever testes, vai ter que se preocupar também com como fazer seus testes rodarem compilados pelo Webpack. E a lista de pré-requisitos para começar a escrever seu _Hello world_ com React só aumenta. A história se repete com TypeScript, CoffeeScript, entre outros. Em não muito tempo, antes que você se torne um desenvolvedor React (que, até pouco tempo atrás, nem sabia do que exatamente se tratava o Webpack), você poderá adicionar o seguinte item no seu curriculum:
+Imagine você, recém entusiasta de React. Vai precisar configurar o Babel para compilar seu JSX (que, possivelmente no começo você ainda nem sabe do que se tratam estes dois!), vai precisar configurar o loader do Babel para o Webpack para que seu navegador consiga entender módulos do Node. Sem contar que, se quiser aprender a escrever testes, vai ter que se preocupar também com como fazer seus testes rodarem compilados pelo Webpack. E a lista de pré-requisitos para começar a escrever seu _Hello world_ com React só aumenta. A história se repete com TypeScript, CoffeeScript, entre outros. Em não muito tempo, antes que você se torne um desenvolvedor React (que, até pouco tempo atrás, nem sabia do que exatamente se tratava o Webpack), você poderá adicionar o seguinte item no seu curriculum:
 
 <blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">Senior Webpack configuration manager</p>&mdash; Kimmo Puputti (@kpuputti) <a href="https://twitter.com/kpuputti/status/730766290755944448">12 de maio de 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -30,11 +30,11 @@ Veja bem, de forma alguma estou falando _mal_ do Webpack. Ele é uma ferramenta 
 
 ### A solução prática: Browserify
 
-Se lembra quando o Browserify era o _new kid on the block_ do JavaScript? Quando tudo se baseava em usar CommonJS nos módulos, instalar o [Browserify](http://npmjs.com/package/browserify), e rodá-lo para gerar o bundle dos seus módulos? Bons tempos, não? :) Bom, saiba que estes _bons tempos_ não acabaram! O Browserify ainda é uma ferramenta ótima (e prática) para _bundling_ de JavaScript, bastante mantida pela comunidade, e com vários plugins/transforms disponíveis por aí!
+Lembra-se de quando o Browserify era o _new kid on the block_ do JavaScript? Quando tudo se baseava em usar CommonJS nos módulos, instalar o [Browserify](http://npmjs.com/package/browserify), e rodá-lo para gerar o bundle dos seus módulos? Bons tempos, não? :) Bom, saiba que estes _bons tempos_ não acabaram! O Browserify ainda é uma ferramenta ótima (e prática) para _bundling_ de JavaScript, bastante mantida pela comunidade, e com vários plugins/transforms disponíveis por aí!
 
 Você lembra da dificuldade que teve na última vez que precisou configurar o Webpack para compilar o JavaScript da sua aplicação? Vamos tentar fazer o mesmo com Browserify, agora mesmo:
 
-Crie uma pasta nova `test_browserify` no seu computador, e rode o comando `npm init` dentro dela, para que o npm gere um novo `package.json`. Você pode simplesmente apertar _enter_ para aceitar todas as opções com o valor padrão.
+Crie uma pasta `test_browserify` no seu computador, e rode o comando `npm init` dentro dela, para que o npm gere um novo `package.json`. Você pode simplesmente apertar _enter_ para aceitar todas as opções com o valor padrão.
 
 Após criar o `package.json`, vamos criar duas pastas dentro de `test_browserify`, vamos chamar uma de `src` (onde ficará o código da sua aplicação) e a outra de `dist` (onde o código compilado será enviado). Repare que nada disso tem a ver com o Browserify, estamos apenas criando algumas pastas como acontece em qualquer outra aplicação.
 
@@ -79,9 +79,9 @@ Quando você chama o comando `browserify src/index.js -o dist/index.js` dentro d
 
 ### Ok, mas e o Babel?! E o React? E o TypeScript?
 
-Calma lá, até agora configuramos o _bundling_ da minha aplicação, mas tentei colocar uma classe no meu arquivo e não funcionou, como assim?! Acontece que o Browserify _por padrão_ só gera o arquivo com a árvore de dependências da aplicação, mas podemos adicionar _transforms_ a ele para que ele saiba  compilar novas sintaxes. Vamos configurar o Browserify para compilar seus módulos usando o Babel?
+_Calma lá, configurei o bundling da minha aplicação, mas tentei colocar uma classe no meu arquivo e não funcionou, como assim?!_ Acontece que o Browserify _por padrão_ só gera o arquivo com a árvore de dependências da aplicação, mas podemos adicionar _transforms_ a ele para que ele saiba  compilar novas sintaxes. Vamos configurar o Browserify para compilar seus módulos usando o Babel?
 
-Para isso vamos usar uma transform do Browserify chamada [babelify](https://www.npmjs.com/package/babelify). Além do babelify, vamos também instalar o preset do Babel que sabe compilar ES2015. Vamos lá, execute o comando `npm install --save-dev babelify babel-preset-es2015` na pasta `test_browserify`.
+Para isso vamos usar uma transform do Browserify chamada [babelify](https://www.npmjs.com/package/babelify). Além do babelify, vamos também instalar o preset do Babel que sabe compilar ES2015. Vamos lá, execute o comando `npm install --save-dev babelify babel-preset-es2015` na pasta `test_browserify`, que irá instalar o babelify e o preset de ES2015.
 
 Após a instalação do `babelify` e do `babel-preset-es2015`, vamos criar um arquivo `.babelrc` na pasta `test_browserify`, apenas para dizer ao Babel (através do babelify) quais presets gostaríamos de usar. O conteúdo do nosso arquivo `.babelrc` será simplesmente:
 
@@ -97,7 +97,7 @@ Agora vamos modificar o nosso npm script de `build` no nosso arquivo `package.js
   "build": "browserify src/index.js -o dist/index.js -t [ babelify ]"
 ```
 
-Vamos modificar o conteúdo do nosso arquivo `src/logger.js` para usarmos algo com ES2015, para que possamos ver o resultado? Vamos deixá-lo assim:
+Vamos modificar o conteúdo do nosso arquivo `src/logger.js` para usarmos algo com ES2015 para que possamos ver o resultado? Vamos deixá-lo assim:
 
 ```js
   class Logger {
