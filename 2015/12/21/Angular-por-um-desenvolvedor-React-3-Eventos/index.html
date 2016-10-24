@@ -1,0 +1,617 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Angular por um desenvolvedor React #3: Eventos | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="O Angular, como diz a própria documentação, é um framework para criação de aplicações dinâmicas que aposta em código declarativo, dado que código assim é melhor para a programação de interfaces web.
+O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular por um desenvolvedor React #3: Eventos">
+<meta property="og:url" content="http://talyssonoc.github.io/2015/12/21/Angular-por-um-desenvolvedor-React-3-Eventos/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="O Angular, como diz a própria documentação, é um framework para criação de aplicações dinâmicas que aposta em código declarativo, dado que código assim é melhor para a programação de interfaces web.
+O">
+<meta property="og:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular por um desenvolvedor React #3: Eventos">
+<meta name="twitter:description" content="O Angular, como diz a própria documentação, é um framework para criação de aplicações dinâmicas que aposta em código declarativo, dado que código assim é melhor para a programação de interfaces web.
+O">
+<meta name="twitter:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/21/Angular-por-um-desenvolvedor-React-3-Eventos/" title="Angular por um desenvolvedor React #3: Eventos" itemprop="url">Angular por um desenvolvedor React #3: Eventos</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-21T10:00:00.000Z" itemprop="datePublished"> Publicado Dec 21 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#abolir-a-função-link"><span class="toc-number">1.</span> <span class="toc-text">Abolir a função link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diretivas-de-fábrica"><span class="toc-number">2.</span> <span class="toc-text">Diretivas de fábrica</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#clipboard-events"><span class="toc-number">2.1.</span> <span class="toc-text">Clipboard Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keyboard-events"><span class="toc-number">2.2.</span> <span class="toc-text">Keyboard Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#focus-events"><span class="toc-number">2.3.</span> <span class="toc-text">Focus Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#form-events"><span class="toc-number">2.4.</span> <span class="toc-text">Form Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mouse-events"><span class="toc-number">2.5.</span> <span class="toc-text">Mouse Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch-events"><span class="toc-number">2.6.</span> <span class="toc-text">Touch Events</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eventos-customizados"><span class="toc-number">3.</span> <span class="toc-text">Eventos customizados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conclusão-sobre-eventos"><span class="toc-number">4.</span> <span class="toc-text">Conclusão sobre eventos</span></a></li></ol>
+		
+		</div>
+		
+		<p>O Angular, como diz a <a href="https://docs.angularjs.org/guide/introduction" target="_blank" rel="external">própria documentação</a>, é um framework para criação de aplicações dinâmicas que aposta em código declarativo, dado que código assim é melhor para a programação de interfaces web.</p>
+<p>O problema é que ainda assim as pessoas costumam esquecer a importância de usar <em>código declarativo</em> e o código da sua aplicação acaba perdendo um pouco da sua expressividade. Quer um exemplo? O excessivo uso da função <a href="https://docs.angularjs.org/api/ng/service/$compile#-link-" target="_blank" rel="external">link</a> quando cria-se uma diretiva!</p>
+<p>Neste post da série <a href="http://talyssonoc.github.io/categories/Angular-por-um-desenvolvedor-React/">Angular por um desenvolvedor React</a> vou discutir um pouco sobre como acho que devam ser usados os eventos dentro do Angular dado meu <em>background</em> com desenvolvimento com o React.</p>
+<img src="https://angularjs.org/img/AngularJS-large.png">
+<a id="more"></a>
+<p>Uma das bases da expressividade de um código escrito usando Angular reside no fato de que você pode programar diretamente no HTML, através de tags e diretivas. Algo que chega até a ser curioso: quando o código coloca HTML no JavaScript, como faz o React, dizem ser loucura e mistura de conceitos; quando coloca-se JavaScript no HTML, como faz o Angular, chamam de “maior expressividade do template”, vai entender.</p>
+<p>Existem diversas diretivas que permitem que você trabalhe com eventos dentro do seu template. Atente-se ao fato que “evento” neste post diz respeito à eventos do DOM, como <em>click</em>, <em>submit</em>, entre outros. Estas diretivas cortam a necessidade de cerca de 95% dos casos onde as pessoas costumam usar a função <code>link</code> (fonte desta estatística: minha imaginação fértil). Então, assim como paramos de usar o <code>$scope</code> no primeiro post da série, neste post vamos parar de usar mais uma outra coisa:</p>
+<h3 id="abolir-a-função-link">Abolir a função link</h3>
+<p>Talvez pareça radical demais, loucura demais. Mas vamos começar com a premissa de <strong>nunca</strong> usar a função <code>link</code>. Eu sei que você vai arrumar um jeito de encontrar casos em que é extremamente necessário. Para estes casos também temos um jeito, mas deixemos eles de lado por enquanto e vamos para os casos mais comuns.</p>
+<p>Caso você não saiba, a função <code>link</code> de uma diretiva especifica uma função que te dá acesso ao elemento do DOM em que a diretiva está montada, comumente usado para adicionar <em>event listeners</em> aos elementos. Notou aí o problema com a expressividade? Se você coloca os seus <em>listeners</em> somente dentro da função <code>link</code> seu código perde uma parte da expressividade. Ao olhar o template da sua diretiva, um usuário não saberá os eventos que acontecem por ali.</p>
+<p>Portanto vamos lá: abolindo a função <code>link</code>!</p>
+<h3 id="diretivas-de-fábrica">Diretivas de fábrica</h3>
+<p>O Angular já vem <em>de fábrica</em> com várias diretivas para adicionar <em>event listeners</em> ao seus elementos. Eles funcionam bem semelhante aos <a href="https://facebook.github.io/react/docs/events.html" target="_blank" rel="external">eventos suportados pelo React</a>. Seguindo a documentação do sistema de eventos do React, eu separei aqui uma lista, na mesma ordem, dos eventos providos <em>de fábrica</em> pelo Angular através de diretivas:</p>
+<h4 id="clipboard-events">Clipboard Events</h4>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngCopy" target="_blank" rel="external">ngCopy</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngCut" target="_blank" rel="external">ngCut</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngPaste" target="_blank" rel="external">ngPaste</a></li>
+</ul>
+<h4 id="keyboard-events">Keyboard Events</h4>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngKeydown" target="_blank" rel="external">ngKeydown</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngKeypress" target="_blank" rel="external">ngKeypress</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngKeyup" target="_blank" rel="external">ngKeyup</a></li>
+</ul>
+<h4 id="focus-events">Focus Events</h4>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngFocus" target="_blank" rel="external">ngFocus</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngBlur" target="_blank" rel="external">ngBlur</a></li>
+</ul>
+<h4 id="form-events">Form Events</h4>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngChange" target="_blank" rel="external">ngChange</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngSubmit" target="_blank" rel="external">ngSubmit</a></li>
+</ul>
+<h4 id="mouse-events">Mouse Events</h4>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngClick" target="_blank" rel="external">ngClick</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngDblclick" target="_blank" rel="external">ngDblclick</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMousedown" target="_blank" rel="external">ngMousedown</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMouseenter" target="_blank" rel="external">ngMouseenter</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMouseleave" target="_blank" rel="external">ngMouseleave</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMousemove" target="_blank" rel="external">ngMousemove</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMouseover" target="_blank" rel="external">ngMouseover</a></li>
+<li><a href="https://docs.angularjs.org/api/ng/directive/ngMouseup" target="_blank" rel="external">ngMouseup</a></li>
+</ul>
+<h4 id="touch-events">Touch Events</h4>
+<p>Depende de <a href="https://docs.angularjs.org/api/ngTouch" target="_blank" rel="external">ngTouch</a>.</p>
+<ul>
+<li><a href="https://docs.angularjs.org/api/ngTouch/directive/ngClick" target="_blank" rel="external">ngClick</a></li>
+<li><a href="https://docs.angularjs.org/api/ngTouch/directive/ngSwipeLeft" target="_blank" rel="external">ngSwipeLeft</a></li>
+<li><a href="https://docs.angularjs.org/api/ngTouch/directive/ngSwipeRight" target="_blank" rel="external">ngSwipeRight</a></li>
+</ul>
+<p>Notou a quantidade de diretivas para eventos do DOM que você já tem por padrão? Veja abaixo um exemplo de um código usando a função <code>link</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ElementDirective.js</span></div><div class="line"><span class="comment">// ...</span></div><div class="line">link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attrs, controller</span>) </span>&#123;</div><div class="line">    element</div><div class="line">    .find(<span class="string">'.my-button'</span>)</div><div class="line">    .on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    	controller.handleClick(e);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// element.html</div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"my-button"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>E agora um código usando somente diretivas:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"ctrl.handleClick($event)"</span>&gt;</span>Click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Notou como o segundo é mais claro para quem lê o código do template? E mais! Possuir código que delega um evento do DOM para um método do <em>controller</em> da sua diretiva diminui a quantidade de código não testado (já que a função <code>link</code> raramente é testada), aumentando seu <em>code coverage</em> se o método no seu controller for coberto por testes.</p>
+<p>Caso você esteja acompanhando a série de posts também pelo repositório no Github, veja aqui um exemplo de <a href="https://github.com/talyssonoc/componentized-angular/blob/master/app/client/js/components/name-input/name-input.html#L2" target="_blank" rel="external">código declarativo com evento</a>.</p>
+<h3 id="eventos-customizados">Eventos customizados</h3>
+<p>Ok, ok, sabemos que as vezes você precisará de eventos customizados de algum tipo no seu template. Como lidar com isso?</p>
+<p>Primeiramente vamos concordar que esses casos são exceções, então vamos criar uma exceção para algo que já falamos neste post: <em>abolir o uso do <code>link</code></em>.</p>
+<p>Você deve se lembrar do primeiro post da série sobre Angular por um desenvolvedor React quando falamos sobre <a href="http://talyssonoc.github.io/2015/11/30/Angular-por-um-desenvolvedor-React-1-Componentizacao/#componentes-helpers-diretivas">diretivas helpers</a>, certo? Estas diretivas eram as únicas que possuiam escopo não-isolado.</p>
+<p>Se você entendeu que tipo de diretivas essas são, deve ter também relacionado que diretivas como <code>ng-click</code>, <code>ng-submit</code> e afins se encaixam neste tipo de diretiva.</p>
+<p>Então vamos às nossas novas regras neste post:</p>
+<ul>
+<li>O uso da função <code>link</code> de uma diretiva deve acontecer somente em diretivas helper;</li>
+<li>Nenhum tipo de lógica deve estar contida dentro do <em>event listener</em>, somente delegação de chamada para o controller do componente;</li>
+<li>E, por último: <strong>sempre</strong> que precisar de um evento custom crie uma diretiva helper o mais genérica possível para este evento e teste-a.</li>
+</ul>
+<h3 id="conclusão-sobre-eventos">Conclusão sobre eventos</h3>
+<p>Este post é bem curto mas a ideia dele é ir direto ao ponto: tenha o código para eventos também declarativo.</p>
+<p>Permitir que a pessoa que lê seu código entenda-o mesmo quando vê somente o template significa que seu código está bem mais legível e expressivo, e aproveita uma feature bastante importante do Angular.</p>
+<p>Qualquer sugestão, crítica ou algo do gênero, é só comentar ali em baixo!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Angular-por-um-desenvolvedor-React/">Angular por um desenvolvedor React</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a><a href="/tags/react/">react</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2015/12/21/Angular-por-um-desenvolvedor-React-3-Eventos/" data-title="Angular por um desenvolvedor React #3: Eventos | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/28/Links-da-semana-fim-de-ano/" title="Links da semana - fim de ano 2015">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Links da semana - fim de ano 2015</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/14/Angular-por-um-desenvolvedor-React-2-Fluxo-de-dados/"  title="Angular por um desenvolvedor React #2: Fluxo de dados">
+ <strong>Próximo：</strong><br/> 
+ <span>Angular por um desenvolvedor React #2: Fluxo de dados
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#abolir-a-função-link"><span class="toc-number">1.</span> <span class="toc-text">Abolir a função link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diretivas-de-fábrica"><span class="toc-number">2.</span> <span class="toc-text">Diretivas de fábrica</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#clipboard-events"><span class="toc-number">2.1.</span> <span class="toc-text">Clipboard Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keyboard-events"><span class="toc-number">2.2.</span> <span class="toc-text">Keyboard Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#focus-events"><span class="toc-number">2.3.</span> <span class="toc-text">Focus Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#form-events"><span class="toc-number">2.4.</span> <span class="toc-text">Form Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mouse-events"><span class="toc-number">2.5.</span> <span class="toc-text">Mouse Events</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch-events"><span class="toc-number">2.6.</span> <span class="toc-text">Touch Events</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eventos-customizados"><span class="toc-number">3.</span> <span class="toc-text">Eventos customizados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conclusão-sobre-eventos"><span class="toc-number">4.</span> <span class="toc-text">Conclusão sobre eventos</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

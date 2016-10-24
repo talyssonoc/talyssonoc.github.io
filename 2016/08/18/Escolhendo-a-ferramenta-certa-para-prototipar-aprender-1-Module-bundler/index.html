@@ -1,0 +1,594 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="Se tem uma coisa que aumenta a barreira de entrada para o mundo JavaScript é a escolha e configuração das ferramentas que serão usadas. Este caso se agrava ainda mais quando se está começando a aprend">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler">
+<meta property="og:url" content="http://talyssonoc.github.io/2016/08/18/Escolhendo-a-ferramenta-certa-para-prototipar-aprender-1-Module-bundler/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="Se tem uma coisa que aumenta a barreira de entrada para o mundo JavaScript é a escolha e configuração das ferramentas que serão usadas. Este caso se agrava ainda mais quando se está começando a aprend">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler">
+<meta name="twitter:description" content="Se tem uma coisa que aumenta a barreira de entrada para o mundo JavaScript é a escolha e configuração das ferramentas que serão usadas. Este caso se agrava ainda mais quando se está começando a aprend">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/18/Escolhendo-a-ferramenta-certa-para-prototipar-aprender-1-Module-bundler/" title="Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler" itemprop="url">Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-18T11:15:54.000Z" itemprop="datePublished"> Publicado Aug 18 2016</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#o-hype-webpack"><span class="toc-number">1.</span> <span class="toc-text">O hype: Webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a-solução-prática-browserify"><span class="toc-number">2.</span> <span class="toc-text">A solução prática: Browserify</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ok-mas-e-o-babel-e-o-react-e-o-typescript"><span class="toc-number">3.</span> <span class="toc-text">Ok, mas e o Babel?! E o React? E o TypeScript?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-eu-preciso-de-watch"><span class="toc-number">4.</span> <span class="toc-text">Mas eu preciso de watch!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-os-sourcemaps"><span class="toc-number">5.</span> <span class="toc-text">E os sourcemaps?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#seja-feliz"><span class="toc-number">6.</span> <span class="toc-text">Seja feliz</span></a></li></ol>
+		
+		</div>
+		
+		<p>Se tem uma coisa que aumenta a barreira de entrada para o mundo JavaScript é a escolha e configuração das ferramentas que serão usadas. Este caso se agrava ainda mais quando se está começando a aprender uma nova biblioteca e você ainda não sabe como configurar a ferramenta, ou quando só está querendo prototipar algo rápido e perda de tempo é inaceitável. O caso retratado pelo tweet abaixo te soa familiar?</p>
+<blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">Marc was almost ready to implement his &quot;hello world&quot; React app <a href="https://t.co/ptdg4yteF1" target="_blank" rel="external">pic.twitter.com/ptdg4yteF1</a></p>&mdash; Thomas Fuchs (@thomasfuchs) <a href="https://twitter.com/thomasfuchs/status/708675139253174273" target="_blank" rel="external">12 de março de 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Pensando nisso, resolvi fazer uma série de posts sobre como escolher a ferramenta certa na hora de prototipar uma aplicação ou quando se está estudando algo novo, ferramentas de fácil (ou nenhuma) configuração, começando por um dos tipos mais imprescindíveis quando se trata de front-end: os <a href="/2015/12/08/Porque-tooling-e-importante/#transpilers-preprocessors-e-bundlers"><em>module bundlers</em></a>!</p>
+<a id="more"></a>
+<h3 id="o-hype-webpack">O hype: Webpack</h3>
+<p>Quando se trata de <em>module bundlers</em>, hoje em dia o hype é usar Webpack. Em posts sobre <a href="/2015/12/08/Porque-tooling-e-importante/">tooling</a> pela internet a fora, o Webpack (e, algumas vezes, o Rollup) é o aclamado. Porém, raramente estes posts citam a dificuldade de se escrever um arquivo de configuração do Webpack. Vamos concordar, você pode muito bem começar com um arquivo vindo de um boilerplate e usá-lo por um tempo, mas não seria interessante já começar conhecendo as ferramentas que você está usando? Ou, melhor ainda, começar usando uma ferramenta que dispensa configurações?</p>
+<p>Imagine você, recém entusiasta de React. Vai precisar configurar o Babel para compilar seu JSX (que, possivelmente no começo você ainda nem sabe do que se tratam estes dois!), vai precisar configurar o loader do Babel para o Webpack para que seu navegador consiga entender módulos do Node. Sem contar que, se quiser aprender a escrever testes, vai ter que se preocupar também com como fazer seus testes rodarem compilados pelo Webpack. E a lista de pré-requisitos para começar a escrever seu <em>Hello world</em> com React só aumenta. A história se repete com TypeScript, CoffeeScript, entre outros. Em não muito tempo, antes que você se torne um desenvolvedor React (que, até pouco tempo atrás, nem sabia do que exatamente se tratava o Webpack), você poderá adicionar o seguinte item no seu curriculum:</p>
+<blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">Senior Webpack configuration manager</p>&mdash; Kimmo Puputti (@kpuputti) <a href="https://twitter.com/kpuputti/status/730766290755944448" target="_blank" rel="external">12 de maio de 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Veja bem, de forma alguma estou falando <em>mal</em> do Webpack. Ele é uma ferramenta poderosíssima, que ainda pretendo falar sobre em posts futuros desta série. O Webpack está num estágio tão avançado atualmente que você consegue usá-lo como um <em>asset pipeline</em> completo, usando-o para compilar e minificar JavaScript, processar CSS/SASS/PostCSS/Stylus/Less, compactar e gerar sprites de imagens, carregar fontes, entre várias outras funcionalidades. Você consegue transformar realmente o Webpack no núcleo do provimento de assets da sua aplicação. Mas ter todas estas funcionalidades enquanto você só quer aprender ou prototipar algo parece meio exagero, não acha?</p>
+<h3 id="a-solução-prática-browserify">A solução prática: Browserify</h3>
+<p>Lembra-se de quando o Browserify era o <em>new kid on the block</em> do JavaScript? Quando tudo se baseava em usar CommonJS nos módulos, instalar o <a href="http://npmjs.com/package/browserify" target="_blank" rel="external">Browserify</a>, e rodá-lo para gerar o bundle dos seus módulos? Bons tempos, não? :) Bom, saiba que estes <em>bons tempos</em> não acabaram! O Browserify ainda é uma ferramenta ótima (e prática) para <em>bundling</em> de JavaScript, bastante mantida pela comunidade, e com vários plugins/transforms disponíveis por aí!</p>
+<p>Você lembra da dificuldade que teve na última vez que precisou configurar o Webpack para compilar o JavaScript da sua aplicação? Vamos tentar fazer o mesmo com Browserify, agora mesmo:</p>
+<p>Crie uma pasta <code>test_browserify</code> no seu computador, e rode o comando <code>npm init</code> dentro dela, para que o npm gere um novo <code>package.json</code>. Você pode simplesmente apertar <em>enter</em> para aceitar todas as opções com o valor padrão.</p>
+<p>Após criar o <code>package.json</code>, vamos criar duas pastas dentro de <code>test_browserify</code>, vamos chamar uma de <code>src</code> (onde ficará o código da sua aplicação) e a outra de <code>dist</code> (onde o código compilado será enviado). Repare que nada disso tem a ver com o Browserify, estamos apenas criando algumas pastas como acontece em qualquer outra aplicação.</p>
+<p>Dentro da pasta <code>test_browserify/src</code>, vamos criar dois arquivos: <code>index.js</code> e <code>logger.js</code>.</p>
+<p>O código do nosso arquivo <code>index.js</code> será:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'./logger'</span>);</div><div class="line"></div><div class="line">logger.log();</div></pre></td></tr></table></figure>
+<p>E o nosso <code>logger.js</code> vai ter o seguinte código:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">log</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Esta função está no arquivo logger.js :)'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Bem simples, certo? Dois arquivos JavaScript, o primeiro importando o segundo e executando uma função do mesmo. Agora entra o Browserify. Vamos usá-lo para gerar um bundle desta nossa inútil mini-aplicação.</p>
+<p>Dentro da pasta <code>test_browserify</code>, rode o seguinte comando para instalar o Browserify como uma dependência de desenvolvimento do nosso projeto: <code>npm install --save-dev browserify</code>. Após isso você verá que o Browserify está listado como uma dependência no arquivo <code>package.json</code>.</p>
+<p>Vamos adicionar um novo npm script para executar o Browserify. Dentro do campo <code>scripts</code> do seu <code>package.json</code> haverá já um script de teste (que simplesmente alerta que nenhum comando de testes foi configurado, podemos ignorar este fato), logo depois dele vamos adicionar o script de compilação. A opção <code>scripts</code> do seu <code>package.json</code> vai ficar assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">  "test": "echo \"Error: no test specified\" &amp;&amp; exit 1",</div><div class="line">  "build": "browserify src/index.js -o dist/index.js"</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>Agora vamos executar o nosso novo npm script! Dentro da pasta <code>test_browserify</code>, execute o comando <code>npm run build</code>. Agora cheque o conteúdo do arquivo <code>dist/index.js</code>. O conteúdo de toda a sua aplicação está ali, não está? :)</p>
+<p>Viu só? Configuramos o <em>bundling</em> da sua aplicação JavaScript em menos de 5 minutos! E você até consegue entender o que aconteceu:</p>
+<p>Quando você chama o comando <code>browserify src/index.js -o dist/index.js</code> dentro do nosso npm script, o que você está dizendo a ele é: &quot;comece pelo meu arquivo <code>src/index.js</code> e percorra todas as suas dependências recursivamente, gere um arquivo com o código de todas estas dependências, e salve no arquivo <code>dist/index.js</code>&quot;. E é isso!</p>
+<h3 id="ok-mas-e-o-babel-e-o-react-e-o-typescript">Ok, mas e o Babel?! E o React? E o TypeScript?</h3>
+<p><em>Calma lá, configurei o bundling da minha aplicação, mas tentei colocar uma classe no meu arquivo e não funcionou, como assim?!</em> Acontece que o Browserify <em>por padrão</em> só gera o arquivo com a árvore de dependências da aplicação, mas podemos adicionar <em>transforms</em> a ele para que ele saiba  compilar novas sintaxes. Vamos configurar o Browserify para compilar seus módulos usando o Babel?</p>
+<p>Para isso vamos usar uma transform do Browserify chamada <a href="https://www.npmjs.com/package/babelify" target="_blank" rel="external">babelify</a>. Além do babelify, vamos também instalar o preset do Babel que sabe compilar ES2015. Vamos lá, execute o comando <code>npm install --save-dev babelify babel-preset-es2015</code> na pasta <code>test_browserify</code>, que irá instalar o babelify e o preset de ES2015.</p>
+<p>Após a instalação do <code>babelify</code> e do <code>babel-preset-es2015</code>, vamos criar um arquivo <code>.babelrc</code> na pasta <code>test_browserify</code>, apenas para dizer ao Babel (através do babelify) quais presets gostaríamos de usar. O conteúdo do nosso arquivo <code>.babelrc</code> será simplesmente:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"presets"</span>: [<span class="string">"es2015"</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Agora vamos modificar o nosso npm script de <code>build</code> no nosso arquivo <code>package.json</code> para avisar ao Browserify que ele deve usar o babelify. O nosso comando agora vai ficar assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"build": "browserify src/index.js -o dist/index.js -t [ babelify ]"</div></pre></td></tr></table></figure>
+<p>Vamos modificar o conteúdo do nosso arquivo <code>src/logger.js</code> para usarmos algo com ES2015 para que possamos ver o resultado? Vamos deixá-lo assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span> </span>&#123;</div><div class="line">  log() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Esta função está no arquivo logger.js :)'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="keyword">new</span> Logger();</div></pre></td></tr></table></figure>
+<p>Agora execute <code>npm run build</code> novamente e cheque o conteúdo do arquivo <code>dist/index.js</code>! Você verá que o código de toda aplicação estará ali, e a nossa classe vai ter sido compilada pelo babelify :)</p>
+<p>Se quiser ver rodando no browser, crie um arquivo <code>index.html</code> dentro da pasta <code>test_browserify</code> com o seguinte conteúdo:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Browserify<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"dist/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Depois abra este arquivo no seu navegador, abra o console do navegador e veja que a mensagem foi logada lá.</p>
+<p>Bem prático, não? Novamente, adicionamos compilação com Babel na nossa aplicação em menos de 5 minutos.</p>
+<p>Se quiser permitir que sua aplicação agora também compile React/JSX, basta rodar o comando <code>npm install --save-dev babel-preset-react &amp;&amp; npm install --save react</code>, para instalar o preset do Babel que compila React, e o próprio React na sua aplicação. Depois adicionar o preset <code>react</code> no seu array de presets do arquivo <code>.babelrc</code> e pronto! Agora seu comando <code>npm run build</code> também compila React.</p>
+<p>Quer compilar também TypeScript com o Browserify de maneira fácil? Não seja por isso, você pode usar o <a href="https://www.npmjs.com/package/tsify" target="_blank" rel="external">tsify</a>. CoffeeScript talvez? Use o <a href="https://www.npmjs.com/package/coffeeify" target="_blank" rel="external">coffeeify</a>. Precisa dar <code>require</code> em arquivos de texto, como o código fonte para templates do Handlebars? Use o <a href="https://www.npmjs.com/package/stringify" target="_blank" rel="external">stringify</a>.</p>
+<h3 id="mas-eu-preciso-de-watch">Mas eu preciso de watch!</h3>
+<p>Quer evitar de ter que rodar seu comando de build toda vez que modifica a sua aplicação? Que tal deixar um processo rodando ouvindo as modificações no seu código que rodará o Browserify automaticamente todas vez que uma modificação for feita? Para isso existe o <a href="https://www.npmjs.com/package/watchify" target="_blank" rel="external">watchify</a>.</p>
+<p>Para instalá-lo basta rodar <code>npm install --save-dev watchify</code>. Agora basta usá-lo no seu script da mesma forma que você usava o <code>browserify</code>, porém como <code>watchify</code>. Vamos modificar novamente o campo <code>scripts</code> do nosso <code>package.json</code> para adicionar o watchify. Ele vai ficar assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">  "test": "echo \"Error: no test specified\" &amp;&amp; exit 1",</div><div class="line">  "build": "browserify src/index.js -o dist/index.js -t [ babelify ]",</div><div class="line">  "watch": "watchify src/index.js -o dist/index.js -t [ babelify ]"</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>Agora execute <code>npm run watch</code>, e você verá que o watchify vai ficar esperando modificações no seu código para recompilá-lo. Modifique algum arquivo da sua aplicação (o nosso <code>logger.js</code>, por exemplo) enquanto este o comando <code>npm run watch</code> está rodando, e depois verifique o conteúdo do arquivo <code>dist/index.js</code>. Note que as modificações estarão lá!</p>
+<h3 id="e-os-sourcemaps">E os sourcemaps?</h3>
+<p>Precisa dos sourcemaps da sua aplicação para ter melhores mensagens de erros no console enquanto está desenvolvendo? A solução com o Browserify é simples! Simplesmente adicione a flag <code>--debug</code> no seu comando (tanto para o <code>browserify</code> quanto para o <code>watchify</code>) e pronto, agora o sourcemap do seu código estará no final do seu <code>dist/index.js</code> quando sua aplicação for compilada.</p>
+<p>Com esta adição, o campo <code>scripts</code> do seu <code>package.json</code> ficará assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">  "test": "echo \"Error: no test specified\" &amp;&amp; exit 1",</div><div class="line">  "build": "browserify src/index.js -o dist/index.js -t [ babelify ] --debug",</div><div class="line">  "watch": "watchify src/index.js -o dist/index.js -t [ babelify ] --debug"</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h3 id="seja-feliz">Seja feliz</h3>
+<p>Bom, o básico que gostaria de passar para vocês sobre como escolher um module bundler para <em>prototipar</em> ou <em>aprender algo novo</em> é isso. Vá de Browserify, não sofra com longos arquivos de configuração, foque no que você está tentando aprender e na sua aplicação, não no <em>tooling</em>. Se mais tarde você sentir necessidade de algo que o Browserify não oferece, aí sim considere aprender como usar o Webpack. Mas acredite, pra quando se está estudando ou testando uma ideia rápida, o Browserify será mais do que o suficiente :)</p>
+<p>Saiba também que o Browserify é muito mais do que isso, ele também possui ferramentas para permitir <em>hot reload</em> de código, compilação e injeção de CSS, entre outros! Isso é assunto para um outro post, que não cabe a esta série. Mas se o assunto te interessou, recomendo a leitura do <a href="https://github.com/substack/browserify-handbook" target="_blank" rel="external">Browserify Handbook</a>. Ele é um guia bem interessante, diretamente no <em>readme</em> do repositório, sobre todas as capacidades do Browserify.</p>
+<p>Agora vá ser feliz enquanto prototipa uma ideia ou aprende algo novo! :D</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Escolhendo-a-ferramenta-certa/">Escolhendo a ferramenta certa</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/react/">react</a><a href="/tags/browserify/">browserify</a><a href="/tags/webpack/">webpack</a><a href="/tags/babel/">babel</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2016/08/18/Escolhendo-a-ferramenta-certa-para-prototipar-aprender-1-Module-bundler/" data-title="Escolhendo a ferramenta certa para prototipar/aprender #1: Module bundler | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/08/25/Empresas-que-usam-React-e-publicam-open-source-que-voce-deveria-seguir/" title="Empresas que usam React que você deveria seguir no GitHub">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Empresas que usam React que você deveria seguir no GitHub</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/02/Links-da-semana-02-05-16/"  title="Links da semana 02/05/16">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 02/05/16
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#o-hype-webpack"><span class="toc-number">1.</span> <span class="toc-text">O hype: Webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a-solução-prática-browserify"><span class="toc-number">2.</span> <span class="toc-text">A solução prática: Browserify</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ok-mas-e-o-babel-e-o-react-e-o-typescript"><span class="toc-number">3.</span> <span class="toc-text">Ok, mas e o Babel?! E o React? E o TypeScript?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-eu-preciso-de-watch"><span class="toc-number">4.</span> <span class="toc-text">Mas eu preciso de watch!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#e-os-sourcemaps"><span class="toc-number">5.</span> <span class="toc-text">E os sourcemaps?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#seja-feliz"><span class="toc-number">6.</span> <span class="toc-text">Seja feliz</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

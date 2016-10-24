@@ -1,0 +1,570 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Porque críticas e code review são importantes? | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="Você já parou pra pensar o quão importante é ter pessoas no seu projeto criticando e revisando seu código? Te apontando possíveis problemas e melhoras que talvez você não tenha conseguido ver quando e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Porque críticas e code review são importantes?">
+<meta property="og:url" content="http://talyssonoc.github.io/2016/01/12/Porque-criticas-e-code-review-sao-importantes/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="Você já parou pra pensar o quão importante é ter pessoas no seu projeto criticando e revisando seu código? Te apontando possíveis problemas e melhoras que talvez você não tenha conseguido ver quando e">
+<meta property="og:image" content="https://davidwalsh.name/demo/code-review.png">
+<meta property="og:updated_time" content="2016-10-24T01:20:34.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Porque críticas e code review são importantes?">
+<meta name="twitter:description" content="Você já parou pra pensar o quão importante é ter pessoas no seu projeto criticando e revisando seu código? Te apontando possíveis problemas e melhoras que talvez você não tenha conseguido ver quando e">
+<meta name="twitter:image" content="https://davidwalsh.name/demo/code-review.png">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/12/Porque-criticas-e-code-review-sao-importantes/" title="Porque críticas e code review são importantes?" itemprop="url">Porque críticas e code review são importantes?</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-12T22:07:00.000Z" itemprop="datePublished"> Publicado Jan 12 2016</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#esfriando-a-cabeça"><span class="toc-number">1.</span> <span class="toc-text">Esfriando a cabeça</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#criando-o-costume"><span class="toc-number">2.</span> <span class="toc-text">Criando o costume</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#não-seja-um-idiota"><span class="toc-number">3.</span> <span class="toc-text">Não seja um idiota</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#o-código-não-você"><span class="toc-number">4.</span> <span class="toc-text">O código, não você</span></a></li></ol>
+		
+		</div>
+		
+		<p>Você já parou pra pensar o quão importante é ter pessoas no seu projeto criticando e revisando seu código? Te apontando possíveis problemas e melhoras que talvez você não tenha conseguido ver quando escreveu? Já xingou o código de um projeto legado sem pensar que talvez uma maneira de melhorá-lo seja aumentar o <em>code review</em>?</p>
+<p>Acontecimentos recentes me fizeram ficar pensando neste fato, com coisas que aconteceram comigo mesmo, e então resolvi fazer este post como uma reflexão sobre o assunto: a importância de críticas e <em>code reviews</em>, além de saber <em>lidar</em> com as críticas e não levar para o lado pessoal.</p>
+<img src="https://davidwalsh.name/demo/code-review.png">
+<a id="more"></a>
+<h3 id="esfriando-a-cabeça">Esfriando a cabeça</h3>
+<p>Atualmente estou trabalhando num projeto que possui bastante código legado, código que já passou pela mão de vários desenvolvedores, principalmente o front-end. Como todo projeto legado, há a tendência de encontrar uma certa quantidade de código não muito agradável, e isso por vezes me irrita, e me pego pensado “como foi que isso passou na revisão?!”.</p>
+<p>Depois de me espantar com esse tipo de coisa, tomei como uma missão pessoal passar a comentar mais em PRs (<a href="https://help.github.com/articles/using-pull-requests/" target="_blank" rel="external"><em>pull requests</em></a>) que eu vejo código propenso a problemas, para que, no futuro, quem mexer no código não passe pela mesma situação que eu.</p>
+<p>As semanas passaram, e eis que recentemente uma PR minha foi bastante comentada, principalmente os códigos que envolviam back-end. E cada vez que eu arrumava algo, surgiam novas críticas, algumas mudanças que, pra mim, não faziam muito sentido, ou eram irrelevantes para a qualidade do código. E, posso dizer, isso também me irritou. Curioso, não?</p>
+<p>Pois é, após ficar pensando porque tantos comentários, imaginando o que é que eu não estava enxergando de problema no código, cheguei a conclusão: os autores dos comentários tinham a mesma intenção que eu quando decidi ser mais ativo nos comentários para gerar códigos melhores, e se eu “desobedecesse” às sugestões eu só estaria gerando mais código ruim para o futuro, e talvez tenha sido isso o que aconteceu aos códigos que me irritaram anteriormente.</p>
+<p>E foi o que me fez esfriar a cabeça quanto a isso, e talvez seja o que você deva fazer também quando comentários em seus códigos te irritatem.</p>
+<h3 id="criando-o-costume">Criando o costume</h3>
+<p>Acho que pelo item anterior você já pode sacar o porque de ser importante revisar e criticar código, não é?</p>
+<p>É importante também criar o costume, a cultura, de revisar código no seu projeto, na sua empresa, nos seus códigos open-source, entre outros!</p>
+<p>Para que isso funcione um dos passos essenciais é trabalhar com algum sistema de gerenciamento de versão e revisão, como o <a href="https://git-scm.com/" target="_blank" rel="external">Git</a>, <a href="https://subversion.apache.org/" target="_blank" rel="external">Subversion</a>, ou <a href="https://www.mercurial-scm.org/" target="_blank" rel="external">Mercurial</a>, sendo o Git o mais conhecido deles. Este tipo de gerenciador permite que você crie “galhos” nas versões do seu código, tornando possível que programadores diferentes trabalhem com partes diferentes do código (ou até a mesma) sem que as mudanças de um afete o ambiente do outro, de modo que, quando alguém for revisar o seu código, ele consiga analisar isoladamente suas mudanças. O <a href="http://danielkummer.github.io/git-flow-cheatsheet/" target="_blank" rel="external">Git Flow</a> é um exemplo de como trabalhar seguindo este esquema.</p>
+<p>É importante lembrar a equipe (e os <em>stakeholders</em>) de que isso não é uma burocracria criada para enrolar o projeto, e sim um filtro que permite diminuir a quantidade de bugs e códigos ruins que entrarão na <em>code base</em> principal.</p>
+<h3 id="não-seja-um-idiota">Não seja um idiota</h3>
+<p>Emprestando o termo usado como título de códigos de condutas em conferências, a regra também se aplica quando você está tendo seu código revisado/criticado ou revisando/criticando: não seja um idiota (do original em inglês: <em>don’t be a jerk</em>).</p>
+<p>Inicialmente, que fique claro que não passei por nada do tipo em projetos recentes.</p>
+<p>Evite agir como o <a href="http://lkml.iu.edu/hypermail/linux/kernel/1510.3/02866.html" target="_blank" rel="external">Linus Torvalds</a> nos comentários, tente entender a perspectiva da outra pessoa, e tenha em mente que, esteja você criticando ou sendo criticado, a ideia é sempre melhorar o código e seguir um padrão, e não forçar gostos pessoais.</p>
+<p>Se você não concorda (completa ou parcialmente) com a mudança sugerida, debata o caso de forma civilizada, não ignore nem seja <em>agressivo</em> falando que algo não faz sentido, ou que a pessoa está mais atrapalhando do que ajudando. Muitos programadores tendem a levar para o lado pessoal quando tem seus códigos criticados, quando não notam que isso na verdade é uma ótima oportunidade para se aprender mais sobre o projeto e sobre desenvolvimento em geral.</p>
+<p>Se acha que está certo, tente provar seu ponto, comente com links, pesquisas de performance, ou qualquer coisa que passe confiança, nada de “porque do outro jeito é melhor” ou “eu não gosto de código deste jeito”.</p>
+<h3 id="o-código-não-você">O código, não você</h3>
+<p>E, por fim, é importante lembrar que o que está sendo criticado é o código, não você. Raramente haverá comentários de cunho pessoal. A única coisa que te afetará é que, caso você aprenda algo com os comentários, não só o código melhorará, como você também. Então tente não esquentar com isso!</p>
+<p>Leitura complementar:</p>
+<ul>
+<li><a href="https://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/" target="_blank" rel="external">The Ten Commandments of Egoless Programming</a></li>
+</ul>
+<p>Fonte das imagens:</p>
+<ul>
+<li><a href="https://davidwalsh.name/code-review" target="_blank" rel="external">Code review</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Porque-e-importante/">Porque é importante?</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/code-review/">code review</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2016/01/12/Porque-criticas-e-code-review-sao-importantes/" data-title="Porque críticas e code review são importantes? | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/15/Links-da-semana-15-01-16/" title="Links da semana 15/01/16">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Links da semana 15/01/16</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/08/Links-da-semana-08-01-16/"  title="Links da semana 08/01/16">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 08/01/16
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#esfriando-a-cabeça"><span class="toc-number">1.</span> <span class="toc-text">Esfriando a cabeça</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#criando-o-costume"><span class="toc-number">2.</span> <span class="toc-text">Criando o costume</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#não-seja-um-idiota"><span class="toc-number">3.</span> <span class="toc-text">Não seja um idiota</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#o-código-não-você"><span class="toc-number">4.</span> <span class="toc-text">O código, não você</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

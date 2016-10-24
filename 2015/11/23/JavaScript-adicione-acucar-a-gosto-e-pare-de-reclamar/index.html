@@ -1,0 +1,587 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript: adicione açúcar a gosto e pare de reclamar | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="Reclamar do JavaScript é um dos atuais hypes na programação, alguns reclamando das novas features que estão surgindo, outros reclamando que deveria estar indo ainda mais rápido, outros ainda reclamand">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript: adicione açúcar a gosto e pare de reclamar">
+<meta property="og:url" content="http://talyssonoc.github.io/2015/11/23/JavaScript-adicione-acucar-a-gosto-e-pare-de-reclamar/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="Reclamar do JavaScript é um dos atuais hypes na programação, alguns reclamando das novas features que estão surgindo, outros reclamando que deveria estar indo ainda mais rápido, outros ainda reclamand">
+<meta property="og:image" content="http://talyssonoc.github.io/img/posts/keep-calm-and-add-sugar.png">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.832Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript: adicione açúcar a gosto e pare de reclamar">
+<meta name="twitter:description" content="Reclamar do JavaScript é um dos atuais hypes na programação, alguns reclamando das novas features que estão surgindo, outros reclamando que deveria estar indo ainda mais rápido, outros ainda reclamand">
+<meta name="twitter:image" content="http://talyssonoc.github.io/img/posts/keep-calm-and-add-sugar.png">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/23/JavaScript-adicione-acucar-a-gosto-e-pare-de-reclamar/" title="JavaScript: adicione açúcar a gosto e pare de reclamar" itemprop="url">JavaScript: adicione açúcar a gosto e pare de reclamar</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-23T10:30:00.000Z" itemprop="datePublished"> Publicado Nov 23 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#syntatic-sugar"><span class="toc-number">1.</span> <span class="toc-text">Syntatic sugar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-eu-quero-fazer-x"><span class="toc-number">2.</span> <span class="toc-text">Mas eu quero fazer X!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-a-sintaxe-não-permite"><span class="toc-number">3.</span> <span class="toc-text">Mas a sintaxe não permite!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-não-dá-pra-fazer-polyfill-de-x"><span class="toc-number">4.</span> <span class="toc-text">Mas não dá pra fazer polyfill de X!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas"><span class="toc-number">5.</span> <span class="toc-text">Mas…</span></a></li></ol>
+		
+		</div>
+		
+		<p>Reclamar do JavaScript é um dos atuais <em>hypes</em> na programação, alguns reclamando das novas features que estão surgindo, outros reclamando que deveria estar indo ainda mais rápido, outros ainda reclamando que a linguagem é simplesmente ruim e ponto. Sinceramente, acho que a única resposta que serve para todos esses tipos de reclamação é: adicione açúcar a gosto e pare de reclamar.</p>
+<p>Antes que comece com “<em>ah, mas não dá pra fazer X com JavaScript, minha linguagem tem X no core</em>” eu espero que você leia o post até o fim.</p>
+<img src="/img/posts/keep-calm-and-add-sugar.png">
+<a id="more"></a>
+<p>A primeira coisa que você deve considerar quando for reclamar que JavaScript não faz algo é: a não ser que os desenvolvedores dos browsers mais usados implementem hoje a tal <em>feature</em> que você quer, e todos os usuários atualizem seus navegadores assim que o <em>update</em> sair, a linguagem passar a ter a tal <em>feature</em> na especificação não vai fazer que todos que acessem seu site tenham acesso à ela. Compreendeu agora?</p>
+<p>Diferentemente da <em>sua linguagem que tem X no core</em>, JavaScript roda no navegador do cliente (NodeJS não se encaixa nesta parte da discussão, mas ao longo do post ele voltará a equação). Então, ao invés de ficar reclamando que JavaScript não faz algo, simplesmente <em>adicione açúcar</em> e faça-o fazer.</p>
+<p>E mais, se você usa o argumento de o fato de o JavaScript “monopolizar” o front-end ser uma coisa ruim, pense um pouco: se só com JavaScript e CSS já existe essa fragmentação imensa de hoje em dia, já imaginou se existisse ainda mais linguagens com diferentes especificações? É, pois é, então vamos lá.</p>
+<h3 id="syntatic-sugar">Syntatic sugar</h3>
+<p>Se você ainda não sabe, adicionar <a href="https://en.wikipedia.org/wiki/Syntactic_sugar" target="_blank" rel="external">syntatic sugar</a> à uma linguagem/código significa implementar algo nesta linguagem para deixar ela mais simples de compreender por humanos, enquanto o funcionamento “por baixo dos panos” continua utilizando somente o que a linguagem oferece inicialmente.</p>
+<p>O uso de <em>syntatic sugar</em> é de grande importância no JavaScript, principalmente quando se trata de uma <em>feature</em> que pode ser adicionada usando-se um <a href="https://en.wikipedia.org/wiki/Polyfill" target="_blank" rel="external">polyfill</a>, pois isso faz com que JavaScript tenha uma quantidade <em>ainda</em> maior de possibilidades a oferecer ao programador. Mas se é algo que <em>parece</em> não ser ser possível usando <em>polyfill</em>, não se precipite, você pode se surpreender!</p>
+<h3 id="mas-eu-quero-fazer-x">Mas eu quero fazer X!</h3>
+<p>Ok, vamos lá, você quer que JavaScript consiga fazer algo. Porque não parar de reclamar e adicionar esta <em>feature</em> de alguma maneira? As pessoas reclamavam que era difícil manipular o DOM com a API original, e daí nasceram bibliotecas como o MooTools e o jQuery, nem tudo tem que vir built-in na linguagem.</p>
+<p>Reclamar que algo não vem no <em>core</em> da linguagem está longe de ser um motivo para você dizer que JavaScript é uma linguagem ruim. Se você já ouviu falar de <a href="https://en.wikipedia.org/wiki/Lisp_%28programming_language%29" target="_blank" rel="external">LISP</a> alguma vez na sua vida vai saber muito bem do que eu estou falando.</p>
+<p>O <em>core</em> do LISP não possui tantas capacidades assim, a quantidade de palavras reservadas da linguagem é bastante limitada, mas ainda assim as pessoas consideram o LISP como a maior das linguagens de programação. Porque? Entre outros motivos, pela capacidade de a linguagem poder ser incrementada através de <a href="http://c2.com/cgi/wiki?LispMacro" target="_blank" rel="external">macros</a>. Os macros do LISP permitem adicionar <em>syntax sugar</em> à linguagem de uma maneira impressionante. O que nos leva ao próximo ponto.</p>
+<h3 id="mas-a-sintaxe-não-permite">Mas a sintaxe não permite!</h3>
+<p>Dizer que a sintaxe de uma linguagem de JavaScript não é amigável ou não te permite fazer <em>também</em> não é um desculpa.</p>
+<p>Você já ouviu falar das linguagens que compilam para JavaScript? Pois é, existem várias, pra todo tipo de gosto, cada um com seu <em>syntax sugar</em> diferente.</p>
+<p>Prefere algo mais tradicional, que continue usando a sintaxe do JavaScript mas adicione novas features? O <a href="http://babeljs.io/" target="_blank" rel="external">Babel</a> ou o <a href="http://sweetjs.org/" target="_blank" rel="external">sweet.js</a> devem ser o suficientes pra você (E mais: se você optou pelo Babel, saiba que tudo que ele adiciona tem a pretensão de estar no core do JavaScript alguma hora, já que ele trabalha com <em>stages</em>, inclusive para ser usado nativamente dentro de um app NodeJS, que vai rodar dentro do seu servidor e não vai depender do navegador do cliente). Não gosta de ter que usar um <em>transpiler</em> de código? Dê uma olhada no <a href="https://www.gnu.org/software/easejs/" target="_blank" rel="external">ease.js</a>, então.</p>
+<p>Você é do tipo de pessoa que prefere uma sintaxe diferente, com blocos baseados em indentação? Talvez <a href="http://coffeescript.org/" target="_blank" rel="external">CoffeeScript</a> seja o seu negócio. E se você gosta da sintaxe do Coffee mas ainda assim acha que falta algo para melhorar sua vida quando está trabalhando com código assíncrono, dê uma olhada no <a href="http://maxtaco.github.io/coffee-script/" target="_blank" rel="external">IcedCoffeeScript</a>.</p>
+<p>Prefere linguagens tipadas? Acha que elas são mais seguras e te ajudam a desenvolver melhor? Sem problemas, talvez antes de reclamar por este motivo você deva dar uma chance ao <a href="http://www.typescriptlang.org/" target="_blank" rel="external">TypeScript</a>, da Microsoft, ao <a href="https://www.dartlang.org/" target="_blank" rel="external">Dart</a>, do Google, ou ao <a href="http://flowtype.org/" target="_blank" rel="external">Flow</a>, do Facebook. Empresas grandes adicionando seus próprios açúcares ao JavaScript, qual sua desculpa? :)</p>
+<p>É um fã de programação funcional? Acha que JavaScript “puro” não é funcional o bastante (e não é mesmo)? Olha, acho que você ainda não deve conhecer o <a href="http://elm-lang.org/" target="_blank" rel="external">Elm</a> nem o <a href="http://livescript.net/" target="_blank" rel="external">LiveScript</a> para estar reclamando assim. Se você se sente confortável programando em Haskell, a curva de aprendizagem destas linguagems vai ser bem suave para você.</p>
+<h3 id="mas-não-dá-pra-fazer-polyfill-de-x">Mas não dá pra fazer polyfill de X!</h3>
+<p>Bom, agora espera lá. Não dá pra fazer polyfill do que você quer fazer, ou não dá pra fazer isso de maneira que você conhece?</p>
+<p>Vou te dar um exemplo de algo que o JavaScript não suporta, e te mostrar um exemplo de <em>syntax sugar</em> que torna possível, o que acha? Que tal implementar algo como o <code>method_missing</code> do Ruby em uma linguagem que compila para JavaScript? Bom, <a href="http://goo.gl/Q82mfO" target="_blank" rel="external">clique aqui</a> e veja com seus próprios olhos :)</p>
+<p>Entendeu agora o que eu quero dizer? Falar que JavaScript não é capaz de algo só mostra que você está se limitando ao que te parece confortável, porque muito possívelmente o que você quer é possível de ser implementado sim.</p>
+<p>Quer usar o sistema de classes, módulos e tipos do Ruby no front-end? Dê uma olhada no <a href="http://opalrb.org/" target="_blank" rel="external">Opal</a>. Já existem até <em>adapters</em> de bibliotecas bem conhecidas do JavaScript para ele, como o <a href="https://github.com/opal/opal-jquery" target="_blank" rel="external">jQuery</a> e o <a href="https://github.com/zetachang/react.rb" target="_blank" rel="external">React</a>. Além de frameworks produzidos especialmente para a linguagem, como o <a href="https://github.com/inesita-rb/inesita" target="_blank" rel="external">Inesita</a> e o <a href="https://github.com/voltrb/volt" target="_blank" rel="external">Volt</a>.</p>
+<p>É mais fã do Python? Que tal experimentar o <a href="http://brython.info/" target="_blank" rel="external">Brython</a>, o <a href="http://www.skulpt.org/" target="_blank" rel="external">Skulpt</a> ou o <a href="https://github.com/pypyjs/pypyjs" target="_blank" rel="external">PyPy.js</a> antes de falar algo? Já existe até um pessoal fazendo a <a href="https://brythonista.wordpress.com/2015/03/28/comparing-the-speed-of-cpython-brython-skulpt-and-pypy-js/" target="_blank" rel="external">comparação da velocidade do CPython às do Brython, do Skulpt e do PyPy.js</a>.</p>
+<p>Prefere Clojure e linguagens LISP-like? O <a href="https://github.com/clojure/clojurescript" target="_blank" rel="external">ClojureScript</a> tem uma comunidade maior e mais forte do que você pode imaginar, o <a href="https://github.com/omcljs/om" target="_blank" rel="external">Om</a> que o diga! O Om é um adapter do React para ClojureScript, que é usado, por exemplo, para fazer o front-end do <a href="https://circleci.com" target="_blank" rel="external">CircleCI</a>. Não acredita? <a href="https://github.com/circleci/frontend" target="_blank" rel="external">Veja com seus próprios olhos</a>.</p>
+<p>Gosta mesmo é de Scala? Talvez te supreenda então a existência do <a href="http://www.scala-js.org/" target="_blank" rel="external">Scala.js</a>, que inclusive também tem adapters para bibliotecas como o <a href="https://github.com/japgolly/scalajs-react" target="_blank" rel="external">React</a> e o <a href="https://github.com/greencatsoft/scalajs-angular" target="_blank" rel="external">Angular</a>.</p>
+<p>Bom, eu não vou ficar aqui citanto todas as possiblidades que possam te levar a reclamar que <em>a sua linguagem faz isso mas JavaScript não</em>. O Jeremy Ashkenas, criador do CoffeeScript, já fez uma <a href="https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js" target="_blank" rel="external">lista de linguagens que compilam para JavaScript</a> para que você dê uma olhada antes de reclamar. Que tal?</p>
+<p>E, me desculpe, mas se você vai usar agora a desculpa de que o código gerado por esses compiladores não é performático, vou precisar te lembrar que existem por aí linguagens que alegam que a <em>programmer experience</em> é mais importante que a performance, além de citar o Kyle Simpson, aka <a href="https://twitter.com/getify" target="_blank" rel="external">@getify</a>, autor da série <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/README.md#you-dont-know-js-book-series" target="_blank" rel="external">You don’t know JS</a> com a seguinte frase:</p>
+<blockquote>
+<p>Transpiled code isn’t <em>great</em> code, but it’s probably better than the code you’ve been writing for the last 20 years.</p>
+</blockquote>
+<h3 id="mas">Mas…</h3>
+<p>Ok, talvez você só reclame porque é o que você gosta de fazer, nesse caso eu não tenho muito a dizer além de: <strong>keep calm and stop complaining</strong>.</p>
+<p>Mas se você entendeu o que eu quis dizer, notou que as capacidades do JavaScript estão limitadas apenas pela quantidade de açúcar que você adiciona na linguagem: <strong>parabéns</strong>. Você sacou que o JavaScript é <em>praticamente</em> o <a href="http://c2.com/cgi/wiki?AssemblyLanguage" target="_blank" rel="external">assembly</a> do desenvolvimento web, uma grande quantidade de pessoas não entende, mas criam alternativas <em>mais alto nível</em> que permitem gerar assembly no final.</p>
+<p>Se você ainda tem algumas reclamações quanto a coisas como o <code>this</code> do JavaScript, ou como funciona a <em>prototype chain</em> da linguagem, temos duas alternativas aqui:</p>
+<ol>
+<li>Aprenda a linguagem direito antes de sair reclamando por aí;</li>
+<li>Simplesmente não use essas coisas que você não entende.</li>
+</ol>
+<p>Existe uma vertente de programadores JavaScript que simplesmente não usam mais o <code>this</code>, por exemplo, e isso não faz deles maus programadores.</p>
+<p>E, por fim, se gostou dessa ideia de adicionar açúcar mas ainda não achou algum JavaScript-like que te satisfaça, o que pode ser dito a você é: <em>stop complaining and bring your own JavaScript</em>.</p>
+<p>Fonte das imagens:</p>
+<ul>
+<li><a href="http://www.keepcalm-o-matic.co.uk/p/keep-calm-and-add-sugar/" target="_blank" rel="external">Keep calm and add sugar</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Discussoes/">Discussões</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/coffeescript/">coffeescript</a><a href="/tags/syntax-sugar/">syntax sugar</a><a href="/tags/typescript/">typescript</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2015/11/23/JavaScript-adicione-acucar-a-gosto-e-pare-de-reclamar/" data-title="JavaScript: adicione açúcar a gosto e pare de reclamar | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/27/Links-da-semana-27-11-15/" title="Links da semana 27/11/15">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Links da semana 27/11/15</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/19/Links-da-semana-19-11-15/"  title="Links da semana 19/11/15">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 19/11/15
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#syntatic-sugar"><span class="toc-number">1.</span> <span class="toc-text">Syntatic sugar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-eu-quero-fazer-x"><span class="toc-number">2.</span> <span class="toc-text">Mas eu quero fazer X!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-a-sintaxe-não-permite"><span class="toc-number">3.</span> <span class="toc-text">Mas a sintaxe não permite!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas-não-dá-pra-fazer-polyfill-de-x"><span class="toc-number">4.</span> <span class="toc-text">Mas não dá pra fazer polyfill de X!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mas"><span class="toc-number">5.</span> <span class="toc-text">Mas…</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

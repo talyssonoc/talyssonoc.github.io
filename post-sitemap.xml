@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://talyssonoc.github.io</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/01/12/Porque-criticas-e-code-review-sao-importantes/</loc>
+        <lastmod>2016-10-24T01:20:34.817Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/02/06/Se-aprofundando-em-uma-linguagem/</loc>
+        <lastmod>2016-10-24T01:09:33.938Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/08/Porque-tooling-e-importante/</loc>
+        <lastmod>2016-10-24T01:09:33.937Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/10/28/Porque-padroes-sao-importantes/</loc>
+        <lastmod>2016-10-24T01:09:33.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/01/Porque-comunicacao-e-importante/</loc>
+        <lastmod>2016-10-24T01:09:33.934Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/28/Links-da-semana-fim-de-ano/</loc>
+        <lastmod>2016-10-24T01:09:33.933Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/10/29/Links-da-semana-30-10-15/</loc>
+        <lastmod>2016-10-24T01:09:33.932Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/27/Links-da-semana-27-11-15/</loc>
+        <lastmod>2016-10-24T01:09:33.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/19/Links-da-semana-19-11-15/</loc>
+        <lastmod>2016-10-24T01:09:33.930Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/01/22/Links-da-semana-22-01-16/</loc>
+        <lastmod>2016-10-24T01:09:33.930Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/04/18/Links-da-semana-18-04-16/</loc>
+        <lastmod>2016-10-24T01:09:33.928Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/01/15/Links-da-semana-15-01-16/</loc>
+        <lastmod>2016-10-24T01:09:33.927Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/02/12/Links-da-semana-12-02-16/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/12/Links-da-semana-12-11-15/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/11/Links-da-semana-11-12-15/</loc>
+        <lastmod>2016-10-24T01:09:33.925Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/01/08/Links-da-semana-08-01-16/</loc>
+        <lastmod>2016-10-24T01:09:33.924Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/05/Links-da-semana-05-11-15/</loc>
+        <lastmod>2016-10-24T01:09:33.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/04/05/Links-da-semana-05-04-16/</loc>
+        <lastmod>2016-10-24T01:09:33.922Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/02/05/Links-da-semana-05-02-16/</loc>
+        <lastmod>2016-10-24T01:09:33.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/04/Links-da-semana-04-12-15/</loc>
+        <lastmod>2016-10-24T01:09:33.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/05/02/Links-da-semana-02-05-16/</loc>
+        <lastmod>2016-10-24T01:09:33.903Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/03/28/JavaScript-sem-padroes-nao-e-bem-assim/</loc>
+        <lastmod>2016-10-24T01:09:33.887Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/23/JavaScript-adicione-acucar-a-gosto-e-pare-de-reclamar/</loc>
+        <lastmod>2016-10-24T01:09:33.832Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/16/Indicando-ES7-Decorators-uteis/</loc>
+        <lastmod>2016-10-24T01:09:33.831Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/01/30/Hello-blog/</loc>
+        <lastmod>2016-10-24T01:09:33.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/08/18/Escolhendo-a-ferramenta-certa-para-prototipar-aprender-1-Module-bundler/</loc>
+        <lastmod>2016-10-24T01:09:33.829Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/08/25/Empresas-que-usam-React-e-publicam-open-source-que-voce-deveria-seguir/</loc>
+        <lastmod>2016-10-24T01:09:33.786Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/02/01/Como-comecar-a-programar-ou-aprender-uma-nova-linguagem/</loc>
+        <lastmod>2016-10-24T01:09:33.772Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2016/01/05/Bem-vindo-2016/</loc>
+        <lastmod>2016-10-24T01:09:33.771Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/21/Angular-por-um-desenvolvedor-React-3-Eventos/</loc>
+        <lastmod>2016-10-24T01:09:33.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/12/14/Angular-por-um-desenvolvedor-React-2-Fluxo-de-dados/</loc>
+        <lastmod>2016-10-24T01:09:33.762Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/30/Angular-por-um-desenvolvedor-React-1-Componentizacao/</loc>
+        <lastmod>2016-10-24T01:09:33.756Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/2015/11/09/Alternativas-Pow/</loc>
+        <lastmod>2016-10-24T01:09:33.745Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

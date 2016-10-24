@@ -1,0 +1,633 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript sem padrões: não é bem assim | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="Antes de explicar do que se trata este post, me sinto na necessidade de falar do que não se trata este post. Este não é um post sobre se você deve usar ponto-e-vírgula (para este assunto você pode ver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript sem padrões: não é bem assim">
+<meta property="og:url" content="http://talyssonoc.github.io/2016/03/28/JavaScript-sem-padroes-nao-e-bem-assim/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="Antes de explicar do que se trata este post, me sinto na necessidade de falar do que não se trata este post. Este não é um post sobre se você deve usar ponto-e-vírgula (para este assunto você pode ver">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript sem padrões: não é bem assim">
+<meta name="twitter:description" content="Antes de explicar do que se trata este post, me sinto na necessidade de falar do que não se trata este post. Este não é um post sobre se você deve usar ponto-e-vírgula (para este assunto você pode ver">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/28/JavaScript-sem-padroes-nao-e-bem-assim/" title="JavaScript sem padrões: não é bem assim" itemprop="url">JavaScript sem padrões: não é bem assim</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2016-03-28T11:44:00.000Z" itemprop="datePublished"> Publicado Mar 28 2016</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#funções-básicas"><span class="toc-number">1.</span> <span class="toc-text">Funções básicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#servidor-e-autenticação"><span class="toc-number">2.</span> <span class="toc-text">Servidor e autenticação</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promises-e-programação-assíncrona"><span class="toc-number">3.</span> <span class="toc-text">Promises e programação assíncrona</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cli"><span class="toc-number">4.</span> <span class="toc-text">CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logging-e-debug"><span class="toc-number">5.</span> <span class="toc-text">Logging e debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#envio-de-emails"><span class="toc-number">6.</span> <span class="toc-text">Envio de emails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#banco-de-dados"><span class="toc-number">7.</span> <span class="toc-text">Banco de dados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#testes-e-cobertura"><span class="toc-number">8.</span> <span class="toc-text">Testes e cobertura</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sockets"><span class="toc-number">9.</span> <span class="toc-text">Sockets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data"><span class="toc-number">10.</span> <span class="toc-text">Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#imutabilidade-e-programação-reativa"><span class="toc-number">11.</span> <span class="toc-text">Imutabilidade e programação reativa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lint"><span class="toc-number">12.</span> <span class="toc-text">Lint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundling-e-compilação"><span class="toc-number">13.</span> <span class="toc-text">Bundling e compilação</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a-polêmica"><span class="toc-number">14.</span> <span class="toc-text">A polêmica</span></a></li></ol>
+		
+		</div>
+		
+		<p>Antes de explicar do que se trata este post, me sinto na necessidade de falar do que <em>não se trata</em> este post. Este não é um post sobre se você deve usar ponto-e-vírgula (para este assunto você pode ver <a href="https://brendaneich.com/2012/04/the-infernal-semicolon/" target="_blank" rel="external">aqui</a>, <a href="https://github.com/twbs/bootstrap/issues/3057" target="_blank" rel="external">aqui</a>, <a href="https://github.com/feross/standard/issues/78" target="_blank" rel="external">aqui</a>, <a href="https://twitter.com/brendaneich/status/626224324731518976" target="_blank" rel="external">aqui</a>, <a href="https://github.com/airbnb/javascript" target="_blank" rel="external">aqui</a>, <a href="http://javascript.crockford.com/code.html" target="_blank" rel="external">aqui</a>, <a href="https://contribute.jquery.org/style-guide/js/" target="_blank" rel="external">aqui</a>, <a href="https://google.github.io/styleguide/javascriptguide.xml" target="_blank" rel="external">aqui</a> ou aq… chega, né?). Este post também não é sobre qual framework MVC/MVP/MVVC/Flux/CQRS você deve usar (mas espere para ver uma pincelada não-polêmica sobre  assunto no final do post).</p>
+<p>Mas espera, se não é sobre isso, sobre o que é este post?</p>
+<p>Bom, a ideia do post começou na minha cabeça quando surgiram os posts “The sad state of &lt;alguma coisa relacionada a JavaScript&gt;” e “&lt;Alguma coisa relacionada a JavaScript&gt; fatigue”. E teve seu ápice quando li o post <a href="https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b" target="_blank" rel="external">State of the Art in JavaScript in 2016</a> e com o caso <a href="http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm" target="_blank" rel="external">npm</a> vs <a href="https://medium.com/@azerbike/i-ve-just-liberated-my-modules-9045c06be67c#.332jufimr" target="_blank" rel="external">Azer</a> vs <a href="https://medium.com/@mproberts/a-discussion-about-the-breaking-of-the-internet-3d4d2a83aa4d" target="_blank" rel="external">kik</a>. Mais especificamente com a discussão em volta do que com a remoção do módulo <a href="https://www.npmjs.com/package/left-pad" target="_blank" rel="external">left-pad</a>.</p>
+<p>Com todo o alarde gerado sobre o JavaScript não ter esta função no <em>core</em>, ou não ter uma biblioteca oficial que contenha este tipo de função, com a impressão das pessoas de que o JavaScript não tem bibliotecas básicas padrão (mesmo as que não fazem sentido serem parte do <em>core</em>, mas que sejam a primeira opção na hora de resolver um dado problema) senti a necessidade de escrever um post que mostrasse que a comunidade JavaScript tem sim bibliotecas padrão assim. E é sobre isto que este post vai falar. Você pode enxergar este post como uma espécie de <a href="/2015/02/06/Se-aprofundando-em-uma-linguagem/#programming-is-awesome">awesome</a>, porém mais descritivo e com foco apenas nas ferramentas mais usadas de cada categoria.</p>
+<a id="more"></a>
+<h3 id="funções-básicas">Funções básicas</h3>
+<p>Dado que um dos estopins para este post foi a confusão por causa do <code>left-pad</code>, acho válido que esta seja a primeira categoria. Nesta categoria há duas opções:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/lodash" target="_blank" rel="external">lodash</a>: Se você não tem preferência por algum estilo de programação específico (você entederá o porque de eu dizer isto no bullet abaixo), simplesmente opte pelo <code>lodash</code>. Ele terá a maioria das funções que você precisa, e se você ainda está confuso sobre usar <code>lodash</code> ou <code>underscore</code>, leia <a href="https://github.com/jashkenas/underscore/issues/2182" target="_blank" rel="external">esta issue</a>.</li>
+<li><a href="https://www.npmjs.com/package/ramda" target="_blank" rel="external">Ramda</a>: Mas se você quer algo mais funcional, vá de Ramda. Me desculpe pessoal do <a href="https://github.com/lodash/lodash/wiki/FP-Guide" target="_blank" rel="external">lodash/fp</a>, mas o Ramda sai na frente. Se quiser saber o porque, leia a sessão “What’s different?” do <a href="http://ramdajs.com/0.20.0/index.html" target="_blank" rel="external">site do Ramda</a>.</li>
+</ul>
+<h3 id="servidor-e-autenticação">Servidor e autenticação</h3>
+<p>Esta é uma das poucas categorias dentro do universo JavaScript que não há <em>tantas</em> opções (perceba que aqui não incluo frameworks para aplicações, mas sim algo mais <em>baixo nível</em>).</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/express" target="_blank" rel="external">Express</a>: O Express é, de longe, o microframework para criação de servidores mais usado da comunidade do Node. Mesmo com toda a <a href="http://thefullstack.xyz/history-express-javascript-framework/" target="_blank" rel="external">confusão recente envolvendo o Douglas Wilson</a>, esta ainda é a melhor opção. A comunidade que produz bibliotecas que funcionam com Express é bem maior que a do Hapi e do Restify, e se você precisar de algo <em>ainda mais baixo nível</em>, opte pelo <a href="https://www.npmjs.com/package/connect" target="_blank" rel="external">Connect</a>.</li>
+<li><a href="https://www.npmjs.com/package/passport" target="_blank" rel="external">Passport</a>: Se você precisa adicionar autenticação à sua aplicação Node, Passport é a melhor opção. Com dezenas das chamadas <a href="http://passportjs.org/" target="_blank" rel="external">“estratégias” de autenticação</a>, incluindo autenticação com <a href="https://github.com/jaredhanson/passport-facebook" target="_blank" rel="external">Facebook</a>, <a href="https://github.com/jaredhanson/passport-twitter" target="_blank" rel="external">Twitter</a>, <a href="https://github.com/jaredhanson/passport-oauth" target="_blank" rel="external">OAuth</a>, <a href="https://github.com/themikenicholson/passport-jwt" target="_blank" rel="external">JWT</a> e vários outros, o Passport é a opção mais completa.</li>
+</ul>
+<h3 id="promises-e-programação-assíncrona">Promises e programação assíncrona</h3>
+<p>Programação assíncrona é um dos grandes fortes do JavaScript, seja usando <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">Promises</a> ou não. Porém, como o gerenciamento manual de código assíncrono é difícil e o surgimento de Promises na especificação linguagem é recente, ainda é necessário usar bibliotecas que facilitam o uso de código assíncrono, veja as melhores opções a se usar para este tipo de problema:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/async" target="_blank" rel="external">async</a>: Se você vai trabalhar com código assíncrono sem usar promises, nem perca tempo procurando outras opções, escolha o <code>async</code>. Esta foi uma das primeiras bibliotecas grandes à resolver o problema com código assíncronos e atualmente já tem mais de 800 mil downloads diários (números tirados do próprio NPM).</li>
+<li><a href="https://www.npmjs.com/package/bluebird" target="_blank" rel="external">Bluebird</a>: É a biblioteca de promises mais performática atualmente, sendo até <a href="https://github.com/petkaantonov/bluebird/issues/381" target="_blank" rel="external">100 vezes mais rápida</a> que sua concorrente <a href="https://www.npmjs.com/package/q" target="_blank" rel="external">Q</a>, que também não é uma má opção se você vai usar promises no <em>browser</em>. Para o caso geral ou quando estiver em dúvida, opte pelo <code>Bluebird</code>.</li>
+</ul>
+<h3 id="cli">CLI</h3>
+<p>Com o surgimento de frameworks e aplicações não-web construídas com Node, criar uma CLI se tornou um fator bem importante, com dezenas e dezenas de opções à se escolher, seguem as principais:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/inquirer" target="_blank" rel="external">Inquirer</a>: Se você precisa fazer uma CLI bastante interativa, com perguntas, checkboxes, listas e tudo mais, sua melhor opção será usar o Inquirer. Esta é, inclusive, a biblioteca usada que adiciona toda aquela interação ao <a href="https://www.npmjs.com/package/yo" target="_blank" rel="external">yo</a>.</li>
+<li><a href="https://www.npmjs.com/package/minimist" target="_blank" rel="external">minimist</a>: Mas se você que algo mais baixo nível, apenas para <em>parse</em> dos argumentos passados por linha de comando, escolha o <code>minimist</code>. Se você esteve na comunidade Node desde o início você deve se lembrar do <a href="https://www.npmjs.com/package/optimist" target="_blank" rel="external">optimist</a>, que foi descontinuado em favor do <a href="https://www.npmjs.com/package/yargs" target="_blank" rel="external">yargs</a>. Sendo assim, usar o <code>minimist</code> ou o <code>yargs</code> torna-se apenas questão de preferência pela API. Na dúvida prefira o <code>minimist</code> por ser mais usado, com cerca de 700 mil downloads diários.</li>
+</ul>
+<h3 id="logging-e-debug">Logging e debug</h3>
+<p>Debugar aplicações Node de maneira prática nunca foi uma tarefa muito fácil, mas já há opções muito boas. Quanto à <em>logging</em>, este “setor” da comunidade JavaScript foi, por muito tempo, dominado pelo <a href="https://www.npmjs.com/package/winston" target="_blank" rel="external">Winston</a>, que hoje em dia está longe de ser a opção devido a altíssima quantidade de <em>bugs</em> presentes no mesmo. Saiba então o que usar:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/debug" target="_blank" rel="external">debug</a>: Apesar do nome, o <code>debug</code> é uma biblioteca de <em>logging</em> bem minimalista que pode ser configurada facilmente e ativada/desativada com o uso de variáveis de ambiente. Precisou de uma biblioteca de <em>logging</em> básica: use o <code>debug</code>. Realmente precisa de algo mais elaborado? Use o <a href="https://www.npmjs.com/package/log4js" target="_blank" rel="external">log4js</a>.</li>
+<li><a href="https://www.npmjs.com/package/morgan" target="_blank" rel="external">morgan</a>: O <code>morgan</code> é um <em>logger</em> de requisições HTTP extretamente útil, e que tem em seu núcleo o próprio <code>debug</code>, citado acima.</li>
+<li><a href="https://www.npmjs.com/package/node-inspector" target="_blank" rel="external">node-inspector</a>: O Node Inspector é hoje a mais usada estratégia de <em>debug</em> usada em aplicações Node, com uma configuração um pouco mais complicada que a sua concorrente mas que vale a pena de se usar. Uma alternativa ao Node Inspector seria o <a href="https://www.npmjs.com/package/iron-node" target="_blank" rel="external">ironNode</a>, que apesar de ainda ser pouco usado vem crescendo bastante dentro da comunidade. Na dúvida, opte pelo <code>Node Inspector</code>.</li>
+</ul>
+<h3 id="envio-de-emails">Envio de emails</h3>
+<ul>
+<li><a href="https://www.npmjs.com/package/nodemailer" target="_blank" rel="external">nodemailer</a>: Aqui não há dúvidas: precisou enviar emails em uma aplicação Node, use o <code>Nodemailer</code>. Com <a href="https://github.com/nodemailer/nodemailer#send-using-a-transport-plugin" target="_blank" rel="external">plugins</a> para os serviços de email mais populares do mercado o <code>Nodemailer</code> é a opção mais completa para este tipo de tarefa.</li>
+</ul>
+<h3 id="banco-de-dados">Banco de dados</h3>
+<p>Nesta categoria vou apresentar duas opções para casos bem distintos mas que são, claramente, as melhores opções para cada um dos dois casos:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/sequelize" target="_blank" rel="external">sequelize</a>: Se sua aplicação precisa se conectar com um banco de dados SQL (Postgres, MySQL, MariaDB, SQLite ou Microsoft SQL Server), opte pelo <code>Sequelize</code>. Dentre todas as opções de ORMs para Node (e há muitas), o <code>Sequelize</code> se sobresai por ter uma das <a href="http://docs.sequelizejs.com/en/latest/" target="_blank" rel="external">melhores documentações</a>, além de uma <a href="https://github.com/sequelize/cli" target="_blank" rel="external">CLI</a> bastante completa, com suporte à <a href="https://github.com/sequelize/cli#migration" target="_blank" rel="external"><em>migrations</em></a> e <em>generators</em>.</li>
+<li><a href="https://www.npmjs.com/package/mongoose" target="_blank" rel="external">mongoose</a>: Este é um outro caso onde não há discussão: se sua aplicação vai se conectar a MongoDB, simplesmente use o <code>Mongoose</code>. É a opção mais usada e com a comunidade mais ativa para quem usa MongoDB com Node.</li>
+</ul>
+<h3 id="testes-e-cobertura">Testes e cobertura</h3>
+<p>Esta é uma daquelas partes meio polêmicas, onde é necessário tomar cuidado para não ser opinado demais, vamos lá:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/mocha" target="_blank" rel="external">mocha</a>: O <code>Mocha</code> é o framework de testes mais usado na comunidade do JavaScript. Você não deve usar somente ele para seus testes (veja os próximos bullets), mas se não sabe bem por onde começar com testes em JavaScript, esta será sua melhor opção, principalmente levando-se em conta a comundiade deste módulo.</li>
+<li><a href="https://www.npmjs.com/package/chai" target="_blank" rel="external">chai</a>: O <code>Chai</code> é uma biblioteca de asserção que pode ser usada perfeitamente em conjunto com o <code>Mocha</code>. Com a opção de usar o estilo TDD ou BDD de escrita de testes.</li>
+<li><a href="https://www.npmjs.com/package/sinon" target="_blank" rel="external">sinon</a>: Já o <code>Sinon</code> é uma biblioteca que facilita o uso de <a href="http://www.giulianovarriale.com/conhecendo-sinon-js-spy-e-stub/" target="_blank" rel="external"><em>spys</em> e <em>stubs</em></a> em testes JavaScript. Você pode estar pensando que usar o Jasmine é uma melhor opção do que usar o combo Mocha + Chai + Sinon, mas posso afirmar que, após um certo tempo trabalhando com o Jasmine, você começa a tropeçar em problemas que simplesmente não existiriam se você usasse estas três bibliotecas.</li>
+<li><a href="https://www.npmjs.com/package/enzyme" target="_blank" rel="external">enzyme</a>: Se a sua aplicação é feita com React e você pretende (e eu espero que pretenda) testar seus componentes, simplesmente use o Enzyme. Com uma API <strong>extremamente</strong> mais simples que a do <a href="https://facebook.github.io/react/docs/test-utils.html" target="_blank" rel="external">React Test Utilities</a>, o <code>Enzyme</code>, do pessoal do AirbBnB, será sua melhor opção. Quer um motivo? Eu aposto que você prefere procurar um elemento renderizado com a classe <code>my-class</code> usando <code>component.find('.my-class')</code> (com o Enzyme) do que com <code>ReactTestUtils.findRenderedDOMComponentWithClass('my-class')</code> (com o React Test Utilities), não é mesmo?</li>
+<li><a href="https://www.npmjs.com/package/supertest" target="_blank" rel="external">supertest</a>: Precisa fazer testes com requisições HTTP? Use o <code>supertest</code>. Ele usa internamente o <code>superagent</code> e permite criar testes com HTTP com uma sintaxe simples e idiomática.</li>
+<li><a href="https://www.npmjs.com/package/factory-girl" target="_blank" rel="external">factory-girl</a>: Se você veio da comunidade Ruby, uma coisa que você pode ter sentido falta na hora de escrever testes que usam o banco de dados é uma boa biblioteca de <em>factory</em>. Com o <code>factory-girl</code> este problema acaba. Com uma API bastante prática e <a href="https://www.npmjs.com/browse/keyword/factory-girl" target="_blank" rel="external">vários adapters</a> para ORMs, o <code>factory-girl</code> é a melhor opção caso você precise testar usando o banco de dados.</li>
+<li><a href="https://www.npmjs.com/package/istanbul" target="_blank" rel="external">istanbul</a>: O Istanbul é o módulo mais usado e completo de geração de <em>code coverage</em> para Node. Se precisar gerar <em>coverage</em> do seu código, não tenha dúvida, use o Istanbul.</li>
+</ul>
+<p>Você pode estar se perguntando “Mas e o <a href="https://www.npmjs.com/package/tape" target="_blank" rel="external">tape</a>? E o <a href="https://www.npmjs.com/package/ava" target="_blank" rel="external">AVA</a>?”. Bom, eu não me esqueci deles, mas dado que eles possuem problemas para rodar testes no navegador, por exemplo (que facilitaria o <em>debug</em> em casos de erro), preferi não adicionar eles à lista.</p>
+<h3 id="sockets">Sockets</h3>
+<p>Sockets são também um dos grandes pontos fortes do Node na hora de desenvolver uma aplicação <em>web</em> em tempo real. Mas qual biblioteca escolher?</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/primus" target="_blank" rel="external">primus</a>: Para começar com o pé direito quando for trabalhar com sockets no Node, use o Primus. Ele é uma abstração que te permite usar diversas bibliotecas de socket de maneira genérica. Daí em diante vira só uma questão de foco da sua aplicação para escolher qual biblioteca usar.</li>
+<li><a href="https://www.npmjs.com/package/socket.io" target="_blank" rel="external">socket.io</a>: Usando como <em>adapter</em> do Primus ou não, o <code>Socket.IO</code> é a biblioteca de socket mais usada pela comunidade do Node. Na dúvida, escolha o <code>Socket.IO</code>, dada a quantidade de <em>features</em> e aplicações grandes que o usa.</li>
+<li><a href="https://www.npmjs.com/package/sockjs" target="_blank" rel="external">sockjs</a>: Mas se você quer uma biblioteca com menos features mas mais performática, você pode optar por usar o <code>SockJS</code>, que não tem, por exemplo, suporte à salas mas aguenta mais requisições simultâneas sem ferir a performance do seu servidor.</li>
+</ul>
+<h3 id="data">Data</h3>
+<p>Trabalhar com datas em JavaScript é uma outra tarefa que, por muito tempo, foi uma coisa chata, mas há um certo tempo temos um vencedor na hora de resolver este problema:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/moment" target="_blank" rel="external">moment</a>: Se você precisa trabalhar com datas, efetuar operações com elas e tudo mais, não pense duas vezes e use o <code>Moment</code>.</li>
+<li><a href="https://www.npmjs.com/package/moment-timezone" target="_blank" rel="external">moment-timezone</a>: Se, além de trabalhar com datas você precisa trabalhar com <em>timezones</em>, você pode usar este plugin para o <code>Moment</code> chamado <code>Moment Timezone</code>, e seus problemas estarão resolvidos.</li>
+</ul>
+<h3 id="imutabilidade-e-programação-reativa">Imutabilidade e programação reativa</h3>
+<p>O título desta seção é composto por dois termos que estão <em>bastante</em> em foco na comunidade JavaScript atual. Mais quais bibliotecas usar?</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/immutable" target="_blank" rel="external">immutable</a>: Se sua aplicação precisará usar dados imutáveis, escolha o <code>ImmutableJS</code>. Produzido pelo pessoal do Facebook, o <code>ImmutableJS</code> possui uma <a href="https://facebook.github.io/immutable-js/docs/" target="_blank" rel="external">ótima documentação</a>, super completa, além da própria biblioteca ser completíssima.</li>
+<li><a href="https://www.npmjs.com/package/rxjs" target="_blank" rel="external">rxjs</a>: Vindo da família de <a href="http://reactivex.io/" target="_blank" rel="external">Reactive Extensions</a>, que possui implementações para várias linguagens, o RxJS é hoje a biblioteca para programação reativa mais em foco na comunidade JavaScript, principalmente por ser usado internamente em um framework front-end que não vou me atrever a citar <em>ainda</em>.</li>
+</ul>
+<h3 id="lint">Lint</h3>
+<p>Após anos tendo esta parte do “mercado” JavaScript dominado pelo JSLint e o JSHint, a comunidade JavaScript finalmente ganhou uma nova opção, renovada e que não sofre dos bugs que seus antecessores sofriam:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/eslint" target="_blank" rel="external">eslint</a>: O <code>ESLint</code> é a melhor opção atualmente para <em>linting</em> de código JavaScript, inclusive com suporte completo à ES2015/ES6, além de plugins para suportar regras específicas do JSX.</li>
+</ul>
+<h3 id="bundling-e-compilação">Bundling e compilação</h3>
+<p>Esta é uma outra parte polêmica dentro da comunidade JavaScript, principalmente quando o assunto é <em>bundling</em>. Perceba agora que é tudo uma questão de necessidade:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/babel" target="_blank" rel="external">babel</a>: Nesta parte não há muito dúvida. Precisou compilar código ES6+ para JavaScript que os browsers atuais entendem: escolha o Babel. Outras opções como o <a href="https://www.npmjs.com/package/traceur" target="_blank" rel="external">traceur</a>, do Google, não tem uma comunidade nem minimamente tão ativa quanto a do Babel.</li>
+<li><a href="https://www.npmjs.com/package/browserify" target="_blank" rel="external">browserify</a> / <a href="https://www.npmjs.com/package/webpack" target="_blank" rel="external">webpack</a>: E aqui começa a polêmica. E agora, <code>browserify</code> ou <code>webpack</code>? É apenas uma questão de necessidade, e eu falo sério. Você precisa apenas traduzir CommonJS/ES Modules de modo que o navegador entenda, sem <code>require</code>s dinâmicos, só com JavaScript (usando, ou não, o Babel) de uma maneira prática e rápida de <strong>configurar</strong>? Não pense muito, escolha o <code>browserify</code>. Quer algo mais elaborado, que compile também para outros padrões de módulos (como AMD, por exemplo), compilar CSS junto, com uma flexibilidade maior, <em>code splitting</em> e tudo mais, ao custo de ter bem mais trabalho configurando? Use o <code>webpack</code>. É só isso.</li>
+</ul>
+<h3 id="a-polêmica">A polêmica</h3>
+<p>Eu disse no começo do post que eu passaria rapidamente e sem muita polêmica pelo assunto <em>frameworks</em>.</p>
+<p>Eu não vou te falar aqui que React é melhor do que Angular ou Ember (apesar de, pessoalmente, eu preferir o React), ou que o CycleJS é melhor porque é mais funcional e reativo, mas vou citar aqui coisas que, ao meu ver, dominaram esta fatia do mercado JavaScript:</p>
+<ul>
+<li>DOM Virtual: independentemente se é usando <a href="https://www.npmjs.com/package/react" target="_blank" rel="external">React</a>, o <a href="https://www.npmjs.com/package/ember" target="_blank" rel="external">Ember</a> que possui o Glimmer, o <a href="https://www.npmjs.com/package/virtual-dom" target="_blank" rel="external">virtual-dom</a> ou o <a href="https://www.npmjs.com/package/@cycle/core" target="_blank" rel="external">CycleJS</a>, que usa o <code>virtual-dom</code> internamente, a tendência do uso de DOM virtual para minimizar as alterações no DOM “de verdade” do navegador é notável. Eu diria que, independente do que você vá escolher como framework, prefira um que use DOM Virtual. (Nota: estou sendo bem pessoal aqui)</li>
+<li>Eventos: A “era” de comunicação direta entre componentes UI, que acarretava em partes da tela não serem atualizadas, acabou. Com o surgimento de arquiteturas como o <a href="https://facebook.github.io/flux/" target="_blank" rel="external">Flux</a> e o crescimento da programação funcional e reativa (ou FRP), adotado pelo CycleJS por exemplo, que permite a notificação de toda a UI sobre modificações e atualizações da tela, este tipo de problema já está basicamente resolvido, tornando-se apenas uma questão de opinião e gosto pela API na hora de escolher qual framework usar.</li>
+</ul>
+<p>Eu sei que o post ficou longo, mas espero ter conseguido alcançar o objetivo de mostrar que o JavaScript tem bibliotecas padrão e reconhecidas, basta você saber pra onde olhar.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Discussoes/">Discussões</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2016/03/28/JavaScript-sem-padroes-nao-e-bem-assim/" data-title="JavaScript sem padrões: não é bem assim | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/04/05/Links-da-semana-05-04-16/" title="Links da semana 05/04/16">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Links da semana 05/04/16</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/12/Links-da-semana-12-02-16/"  title="Links da semana 12/02/16">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 12/02/16
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#funções-básicas"><span class="toc-number">1.</span> <span class="toc-text">Funções básicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#servidor-e-autenticação"><span class="toc-number">2.</span> <span class="toc-text">Servidor e autenticação</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promises-e-programação-assíncrona"><span class="toc-number">3.</span> <span class="toc-text">Promises e programação assíncrona</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cli"><span class="toc-number">4.</span> <span class="toc-text">CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logging-e-debug"><span class="toc-number">5.</span> <span class="toc-text">Logging e debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#envio-de-emails"><span class="toc-number">6.</span> <span class="toc-text">Envio de emails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#banco-de-dados"><span class="toc-number">7.</span> <span class="toc-text">Banco de dados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#testes-e-cobertura"><span class="toc-number">8.</span> <span class="toc-text">Testes e cobertura</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sockets"><span class="toc-number">9.</span> <span class="toc-text">Sockets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data"><span class="toc-number">10.</span> <span class="toc-text">Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#imutabilidade-e-programação-reativa"><span class="toc-number">11.</span> <span class="toc-text">Imutabilidade e programação reativa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lint"><span class="toc-number">12.</span> <span class="toc-text">Lint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundling-e-compilação"><span class="toc-number">13.</span> <span class="toc-text">Bundling e compilação</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a-polêmica"><span class="toc-number">14.</span> <span class="toc-text">A polêmica</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

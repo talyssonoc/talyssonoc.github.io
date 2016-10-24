@@ -1,0 +1,589 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Angular por um desenvolvedor React #1: Componentização | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="Quando ouvi falar do Angular pela primeira vez achei a ideia genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, le">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular por um desenvolvedor React #1: Componentização">
+<meta property="og:url" content="http://talyssonoc.github.io/2015/11/30/Angular-por-um-desenvolvedor-React-1-Componentizacao/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="Quando ouvi falar do Angular pela primeira vez achei a ideia genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, le">
+<meta property="og:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular por um desenvolvedor React #1: Componentização">
+<meta name="twitter:description" content="Quando ouvi falar do Angular pela primeira vez achei a ideia genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, le">
+<meta name="twitter:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/30/Angular-por-um-desenvolvedor-React-1-Componentizacao/" title="Angular por um desenvolvedor React #1: Componentização" itemprop="url">Angular por um desenvolvedor React #1: Componentização</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-30T10:30:00.000Z" itemprop="datePublished"> Publicado Nov 30 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#angular-não-componentizado"><span class="toc-number">1.</span> <span class="toc-text">Angular não componentizado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#definindo-tipos-de-componentes"><span class="toc-number">2.</span> <span class="toc-text">Definindo tipos de componentes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-de-página"><span class="toc-number">3.</span> <span class="toc-text">Componentes de página</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-burros"><span class="toc-number">4.</span> <span class="toc-text">Componentes burros</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-helpers-diretivas"><span class="toc-number">5.</span> <span class="toc-text">Componentes helpers/diretivas</span></a></li></ol>
+		
+		</div>
+		
+		<p>Quando ouvi falar do Angular pela primeira vez achei a ideia genial! Para uma pessoa que já havia mexido com o Backbone, não precisar se preocupar com o DOM diretamente era um paraíso. Com o tempo, lendo reviews de programadores influentes que usaram, acabei mudando de ideia.</p>
+<p>Com o React foi exatamente o contrário. A primeira vista achei estranho, simples demais, e JSX me parecia uma maluquice. Porém com o tempo fui notando o potencial que a biblioteca tinha, principalmente com a capacidade de permitir <em>serverside rendering</em> e virei fã.</p>
+<p>Hoje, depois de meses mexendo com o React e sem dar muita importância ao Angular, noto que em parte o Angular é mais <em>mal entendido</em> do que ruim. Não, ainda não gosto do framework, e o fato de não permitir <em>serverside rendering</em> influencia nisso (não, coisas como o <a href="https://prerender.io/" target="_blank" rel="external">Prerender</a> ou o <a href="http://escapedfragment.io/" target="_blank" rel="external">EscapedFragment.io</a> não me convencem). Mas depois de ler alguns posts que vou citar ao longo deste primeiro post, resolvi tentar novamente fazer algo em Angular, seguindo algumas coisas que aprendi com o React. E neste primeiro post sobre o assunto vou falar sobre componentização!</p>
+<img src="https://angularjs.org/img/AngularJS-large.png">
+<a id="more"></a>
+<h3 id="angular-não-componentizado">Angular não componentizado</h3>
+<p>Componentes <em>isolados</em> que <s>teoricamente</s> só acessam dados dos seus <em>props</em>, do seu <em>state</em> ou do <em>context</em> para mim foi uma das grandes sacadas do React. É incrível o quanto isso pode promover a reaproveitabilidade de um componente. Componentes estes que podem ser testados separadamente sem muito problema.</p>
+<p>Já no Angular, por outro lado, há um intenso uso do <code>$scope</code>. Apesar de fazer sentido, e parecer super prático jogar uma função ou um dado no <code>$scope</code> e ele estar disponível pra você lá, a ideia é estranha, por vários motivos. O Angular alega ser mais testável, o que concordo que pode ser afirmado se você levar em conta que o uso de <a href="https://docs.angularjs.org/guide/di" target="_blank" rel="external"><em>dependency injection</em></a> no framework é algo bem útil. Porém, usar o <code>$scope</code> já deixa <em>estranho</em> de se testar. Continua fácil? Sim. Mas, por exemplo, em testes de controllers você acaba testando o que está no <code>$scope</code>, não no controller. Os <code>$scope</code>s não são os controllers, eles também não são os models dentro de um controller (dado que de um escopo mais interno você seria capaz de acessar o de cima). Testar o que está no <code>$scope</code> dentro de um teste de controller parece meio estranho, não?</p>
+<p>Usar um <code>ng-controller</code> também é algo meio estranho, principalmente quando você não usa o <code>Controller as</code>. Isso também diminui a reusabilidade, ou pelo menos a manutenibilidade da mesma. Já pensou ter que passar por todo lugar onde um tal controller é usado porque agora ele tem um novo dado dentro dele?</p>
+<p>Pois é, é para casos assim que existem as <a href="https://docs.angularjs.org/guide/directive" target="_blank" rel="external">directives</a>! Mas espera aí, usar directives para componentizar mas continuar usando <code>$scope</code> ainda não ajuda muita coisa, testar ainda vai ter aquele cheiro de “<em>estou testando o que eu não deveria estar testando aqui</em>”.</p>
+<p>Foi depois de ler os artigos <a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef" target="_blank" rel="external">Sane, scalable Angular apps are tricky, but not impossible</a> e <a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html" target="_blank" rel="external"> Refactoring Angular Apps to Component Style</a>, e começar a associar algumas ideias que vieram do React aplicadas ao Angular que notei que era sim possível usar a ideia de componentes isolados com o Angular!</p>
+<h3 id="definindo-tipos-de-componentes">Definindo tipos de componentes</h3>
+<p>Quando comecei a pensar mais sobre o assunto, principalmente o ponto de <em>fazer tudo ser uma diretiva</em> do artigo do pessoal do PayPal, notei que haveriam diferentes <em>tipos</em> de componentes. O modo como um componente equivalente à uma página inteira seria programado era diferente de como um componente bem mais reutilizável (um componente de upload, por exemplo) seria programado.</p>
+<p>E mais, deicidi que eu usaria somente diretivas do tipo <code>E</code> ou <code>A</code>. Nada de <code>EA</code>, nem <code>C</code>, nem nenhuma outra mistura. Usar o tipo de <code>restrict</code> dos componentes consistentemente é algo que também ajuda a entender para que cada componente serve de maneira semântica.</p>
+<h3 id="componentes-de-página">Componentes de página</h3>
+<p>Como dito no artigo do PayPal, até páginas inteiras seriam melhor usadas se também fossem transformadas em diretivas, o que ajuda inclusive na hora de criar as <em>routes</em> do seu app.</p>
+<p>Então deicidi que eu usaria diretivas com <code>restrict: 'E'</code> com escopo isolado, com controllers que seriam usados somente por elas, inclusive usando <code>controllerAs</code> igual a <code>'ctrl'</code> para todas as páginas. Usar sempre <code>'ctrl'</code> facilita para que você não precise ficar voltando no arquivo da diretiva para saber que nome foi usado para o controller, e se o controller precisar mudar de nome você não precisará mudar o código do template da diretiva também.</p>
+<p>Desta forma, toda dependência que deva ser injetada em um componente será injetada no controller da mesma, nunca diretamente na diretiva.</p>
+<p>Se estivéssemos usando ES2016/ES7 para definir um componente de página, seria da seguinte forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// MyPage.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPage</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>() &#123;</div><div class="line">    	<span class="keyword">this</span>.restrict = <span class="string">'E'</span>;</div><div class="line">        <span class="keyword">this</span>.scope = &#123;&#125;;</div><div class="line">        <span class="keyword">this</span>.controller = <span class="string">'MyController'</span>;</div><div class="line">        <span class="keyword">this</span>.controllerAs = <span class="string">'ctrl'</span>;</div><div class="line">        <span class="keyword">this</span>.template = <span class="string">'&lt;div&gt;Hello, &#123;&#123; ctrl.name | uppercase &#125;&#125;&lt;/div&gt;'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.directive(<span class="string">'myPage'</span>, (...args) =&gt; <span class="keyword">new</span> MyPage(...args));</div><div class="line"></div><div class="line"><span class="comment">// MyController.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyController</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> $inject = [<span class="string">'getName'</span>];</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(getName) &#123;</div><div class="line">    	<span class="keyword">this</span>.name = getName();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.controller(<span class="string">'MyController'</span>, MyController);</div><div class="line"></div><div class="line"><span class="comment">// routes.js</span></div><div class="line"><span class="comment">// ...</span></div><div class="line">$routeProvider.when(<span class="string">'/my-page'</span>, &#123;</div><div class="line">   	<span class="attr">template</span>: <span class="string">'&lt;my-page&gt;&lt;/my-page&gt;'</span></div><div class="line">&#125;);</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+<h3 id="componentes-burros">Componentes burros</h3>
+<p>Se você já tem algum conhecimento de React, já sabe o que é um componente burro. Os componentes burros só acessam dados vindo “de cima” e não fazem data-fetching de nenhuma maneira. Eles existem para serem renderizados apenas com dados que vem das <code>props</code>, sem saber a origem dos mesmos.</p>
+<p>Pois é, isto também pode ser reproduzido com Angular. A lógica é bem parecida com os componentes de página, com algumas pequenas diferenças:</p>
+<ul>
+<li>Eles recebem atributos quando usados, desta forma iremos usar o <code>bindToController</code> para receber estes atributos, já que eles também terão escopo isolado, nada de usar <code>$scope</code>;</li>
+<li>Componentes burros podem (não quer dizer que devam) fazer <em>transclusion</em>.</li>
+</ul>
+<p>Simples, não? Pois é, porém por muito tempo a comunidade Angular não usou este tipo de <em>mindset</em> para desenvolver diretivas. Este estilo de usar componentes, que nasceu com o React, se provou tão eficiente quanto a reusabilidade e testabilidade, que o Angular 1.5 vai até ter um método <code>.component()</code> que funciona como um wrapper para o <code>.directive()</code> com alguns valores já pré-definidos. Você pode ler mais sobre isso no artigo <a href="http://toddmotto.com/exploring-the-angular-1-5-component-method/" target="_blank" rel="external">Exploring the Angular 1.5 .component() method</a> do Todd Motto.</p>
+<p>Se você ainda não sabe, o <code>bindToController</code> de uma diretiva permite que dados que você passar para a diretiva através de atributos serão salvos como propriedades do controller da mesma. E as diretivas com <em>transclusion</em> permitem que você passe elementos filhos de uma diretiva (se você já usou o React, a ideia é semelhante ao <code>this.props.children</code>).</p>
+<p>Veja abaixo como ficaria uma diretiva de um componente burro:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Greet.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greet</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>() &#123;</div><div class="line">    	<span class="keyword">this</span>.restrict = <span class="string">'E'</span>;</div><div class="line">        <span class="keyword">this</span>.scope = &#123;&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.controller = <span class="string">'GreetController'</span>;</div><div class="line">        <span class="keyword">this</span>.controllerAs = <span class="string">'ctrl'</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.bindToController = &#123;</div><div class="line">        	<span class="attr">name</span>: <span class="string">'='</span></div><div class="line">        &#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.template = <span class="string">`</span></div><div class="line">        	&lt;div&gt;</div><div class="line">            	Hello, &lt;b&gt;&#123;&#123; ctrl.upperName() &#125;&#125;&lt;/b&gt;</div><div class="line">            &lt;/div&gt;`;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.directive(<span class="string">'greet'</span>, (...args) =&gt; <span class="keyword">new</span> Greet(...args));</div><div class="line"></div><div class="line"><span class="comment">// GreetController.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GreetController</span> </span>&#123;</div><div class="line">    upperName() &#123;</div><div class="line">    	<span class="keyword">return</span> <span class="keyword">this</span>.name.toUpperCase();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.controller(<span class="string">'GreetController'</span>, GreetController);</div></pre></td></tr></table></figure>
+<p>Agora, com este componente, até podemos reescrever o template da nossa <em>page</em> do item anterior pra algo assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.template = <span class="string">'&lt;div&gt;&lt;greet name="name"&gt;&lt;/greet&gt;&lt;/div&gt;'</span>;</div></pre></td></tr></table></figure>
+<p>Este é um exemplo besta, que não demonstra bem o poder do uso de componentes burros, mas com um pouco de prática nisso você notará a liberdade que este <em>approach</em> te dá.</p>
+<p>Além do mais, notou que agora, sem usar <code>$scope</code>, testar o controller destas nossas diretivas testa <strong>realmente</strong> o controller, e não o <code>$scope</code> que ele tem acesso?</p>
+<h3 id="componentes-helpers-diretivas">Componentes helpers/diretivas</h3>
+<p>Estes componentes são bem diferentes dos citados anteriormente. Estes terão acesso ao <code>$scope</code> (apesar de que vão usá-los somente para escrita, <strong>nunca</strong> para leitura internamente). Além do fato que em alguns apps a existência deste tipo de componente pode nem ser necessária.</p>
+<p>Uma outra forma de ver estes componentes é tê-los como <em>mixins</em>. Eles são usados para isolar-se lógicas que são usadas em mais de um componente. De maneira geral, vou chamá-los apenas de diretivas. Confuso? Você já vai entender.</p>
+<p>Vamos dizer que você está escrevendo um blog, e quer que em várias páginas você acessará informações do blog em si (como o nome do blog, todos os autores e afins). Não fica meio repetitivo escrever o <em>fetch</em> destes dados toda vez no controller da diretiva da sua página? Ok, podemos isolar esta lógica numa factory/provider/service. Mas, ainda assim, não fica repetitivo injetar a mesma factory/provider/service no controller da página? Minha solução pra isso foi criar as diretivas.</p>
+<p>Estes componentes, diferentemente dos anteriores, são do tipo <code>A</code>. O que significa que você os usará como atributos. E mais, eles não terão um escopo isolado.</p>
+<p>Cada diretiva adicionará ao escopo de onde foi adicionado somente <strong>uma</strong> variável, com o seu nome, numa espécie de namespace. Dentro desta variável ele deixará acessível <em>funções</em> e atributos para serem usados dentro do escopo em que a diretiva foi inserida. Estas funções devem ser <a href="https://en.wikipedia.org/wiki/Pure_function" target="_blank" rel="external">funções puras</a>, de modo que os componentes não criem dependência com a lógica usada dentro da diretiva. Caso for alguma dependência de lógica (por exemplo, um cálculo que vai ser usado em vários lugares do sistema), aí sim isso deve ser isolado em uma factory/provider/service.</p>
+<p>Ainda confuso? Vamos a um exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Blog.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Blog</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>() &#123;</div><div class="line">    	<span class="keyword">this</span>.restrict = <span class="string">'A'</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.controller = <span class="string">'BlogController'</span>;</div><div class="line">        <span class="keyword">this</span>.controllerAs = <span class="string">'blog'</span>; <span class="comment">// note que aqui não é 'ctrl'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.directive(<span class="string">'blog'</span>, (...args) =&gt; <span class="keyword">new</span> Blog(...args));</div><div class="line"></div><div class="line"><span class="comment">// BlogController.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogController</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> $inject = [<span class="string">'$scope'</span>];</div><div class="line">    </div><div class="line">    <span class="keyword">constructor</span>($scope) &#123;</div><div class="line">    	<span class="keyword">this</span>.data = $scope.blog = &#123;&#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.data.name = <span class="string">'My blog'</span>;</div><div class="line">        <span class="keyword">this</span>.data.authors = [<span class="string">'Talysson'</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>.data.getName = <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// atenção ao uso de arrow-function por causa do `this`</span></div><div class="line">        	<span class="keyword">return</span> <span class="keyword">this</span>.data.name;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">app.controllers(<span class="string">'BlogController'</span>, BlogController);</div></pre></td></tr></table></figure>
+<p>Deu pra sacar? Veja que agora podemos reescrever o <code>template</code> do nosso componente <code>Greet</code> da seguinte maneira:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.template = <span class="string">`</span></div><div class="line">    &lt;div data-blog&gt;</div><div class="line">    	Hello, &lt;b&gt;&#123;&#123; ctrl.name &#125;&#125;&lt;/b&gt;, welcome to &#123;&#123; blog.getName() &#125;&#125;</div><div class="line">    &lt;/div&gt;`;</div></pre></td></tr></table></figure>
+<p>Uma função exportada por uma diretiva <strong>nunca</strong> deve modificar seus parâmetros, caso houver algum.</p>
+<p>Bom, como um desenvolvedor React, minha primeira impressão de um modo bom para se usar o Angular foi pensar no modo de componentização. Espero que tenham gostado deste primeiro post sobre o assunto!</p>
+<p>O código para este primeiro post se encontra no repositório <a href="https://github.com/talyssonoc/componentized-angular/tree/componentization" target="_blank" rel="external">talyssonoc/componentized-angular</a>. Você notará que ele está um pouco mais lapidado e ainda não está usando o router (ele foi citado no post para mostrar o motivo de porque uma página também deve ser escrita com uma diretiva), resta a você dar uma explorada no repositório! (Repare que o link é para o primeiro release, que corresponde à este primeiro post).</p>
+<p>Sinta-se livre para comentar sobre algo que deixei passar, principalmente se você tem mais experiência com Angular e sabe que algo do que foi descrito acima tem potencial para dar problemas futuros, ou até mesmo sobre algum <em>typo</em> que cometi ao longo do post.</p>
+<p>Até a próxima!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Angular-por-um-desenvolvedor-React/">Angular por um desenvolvedor React</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a><a href="/tags/react/">react</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2015/11/30/Angular-por-um-desenvolvedor-React-1-Componentizacao/" data-title="Angular por um desenvolvedor React #1: Componentização | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/04/Links-da-semana-04-12-15/" title="Links da semana 04/12/15">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Links da semana 04/12/15</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/27/Links-da-semana-27-11-15/"  title="Links da semana 27/11/15">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 27/11/15
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#angular-não-componentizado"><span class="toc-number">1.</span> <span class="toc-text">Angular não componentizado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#definindo-tipos-de-componentes"><span class="toc-number">2.</span> <span class="toc-text">Definindo tipos de componentes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-de-página"><span class="toc-number">3.</span> <span class="toc-text">Componentes de página</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-burros"><span class="toc-number">4.</span> <span class="toc-text">Componentes burros</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentes-helpers-diretivas"><span class="toc-number">5.</span> <span class="toc-text">Componentes helpers/diretivas</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>

@@ -1,0 +1,573 @@
+
+ <!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Angular por um desenvolvedor React #2: Fluxo de dados | Talysson Oliveira</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Talysson">
+    
+
+    
+    <meta name="description" content="No post passado da série Angular por um desenvolvedor React introduzi o conceito de componentes a serem usados no Angular bastante semelhante com os padrões usados em aplicações desenvolvidas com Reac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular por um desenvolvedor React #2: Fluxo de dados">
+<meta property="og:url" content="http://talyssonoc.github.io/2015/12/14/Angular-por-um-desenvolvedor-React-2-Fluxo-de-dados/index.html">
+<meta property="og:site_name" content="Talysson Oliveira">
+<meta property="og:description" content="No post passado da série Angular por um desenvolvedor React introduzi o conceito de componentes a serem usados no Angular bastante semelhante com os padrões usados em aplicações desenvolvidas com Reac">
+<meta property="og:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta property="og:updated_time" content="2016-10-24T01:09:33.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular por um desenvolvedor React #2: Fluxo de dados">
+<meta name="twitter:description" content="No post passado da série Angular por um desenvolvedor React introduzi o conceito de componentes a serem usados no Angular bastante semelhante com os padrões usados em aplicações desenvolvidas com Reac">
+<meta name="twitter:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta name="twitter:creator" content="@talyssonoc">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/logo.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Talysson Oliveira" title="Talysson Oliveira"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Talysson Oliveira">Talysson Oliveira</a></h1>
+				<h2 class="blog-motto">Desenvolvimento &amp; front-end</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Arquivo</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Busca" />
+						<input type="hidden" name="q" value="site:talyssonoc.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/14/Angular-por-um-desenvolvedor-React-2-Fluxo-de-dados/" title="Angular por um desenvolvedor React #2: Fluxo de dados" itemprop="url">Angular por um desenvolvedor React #2: Fluxo de dados</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Talysson" target="_blank" itemprop="author">Talysson</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-14T10:09:00.000Z" itemprop="datePublished"> Publicado Dec 14 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Conteúdos</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#estado-local-intermediário"><span class="toc-number">1.</span> <span class="toc-text">Estado local intermediário</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#estado-compartilhado-persistente"><span class="toc-number">2.</span> <span class="toc-text">Estado compartilhado persistente</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comunicação-entre-componentes"><span class="toc-number">3.</span> <span class="toc-text">Comunicação entre componentes</span></a></li></ol>
+		
+		</div>
+		
+		<p>No post passado da série <a href="http://talyssonoc.github.io/categories/Angular-por-um-desenvolvedor-React/">Angular por um desenvolvedor React</a> introduzi o conceito de componentes a serem usados no Angular bastante semelhante com os padrões usados em aplicações desenvolvidas com React.</p>
+<p>Neste segundo post vou falar um pouco sobre o fluxo de dados, o modo como a mudança do estado da aplicação pode ser propagada para todos os componentes e um pouco da minha opinião sobre o <em>two-way data binding</em> e como ele deve ser usado.</p>
+<img src="https://angularjs.org/img/AngularJS-large.png">
+<a id="more"></a>
+<p>Assim como com o React, eu gosto bastante da <a href="http://facebook.github.io/flux/" target="_blank" rel="external">arquitetura Flux</a> e a ideia de ter um fluxo único de dados. Ela é uma arquitetura que pode ser aplicada independente de framework ou linguagem. Cheguei inclusive à fazer alguns experimentos usando <a href="https://github.com/talyssonoc/jquery-flux-todo" target="_blank" rel="external">arquitetura flux em um app jQuery</a>, e não houve nada que achei ser <em>impossível</em> sem estar usando o React. (Caso veja o código do app com jQuery, pode ser que encontre algumas coisas feias no código, eu não cheguei a me dedicar tanto nele, dado que foi apenas um experimento).</p>
+<p>Em meus estudos sobre Angular tendo React em mente, comecei a pensar em modos de criar apps que não fiquem pouco manuteníveis ou difíceis de testar por conta do <em>two-way data binding</em>.</p>
+<p>Caso você não tenha familiaridade com o termo, <em>two-day <a href="https://docs.angularjs.org/guide/databinding" target="_blank" rel="external">data binding</a></em> é uma funcionalidade de um sistema que permite que duas unidades que compartilhem dados entre si possam modificar uma a outra. Em se tratando de MVC, seria um caso onde modificações na view são refletidas no model, e modificações no model são refletidas na view, algo bem comum em aplicações feitas com Angular.</p>
+<p>Mas qual o problema nisso? Em geral, nenhum, mas as pessoas costumam abusar desta funcionalidade sem notar que isto pode ser nocivo. Digamos que você tem um componente <strong>B</strong> dentro de um componente <strong>A</strong>. Você passa um dado <strong>x</strong> de A para B, e a view de B possui <em>two-way data binding</em> para modificar x. Isso será refletido em A também, e isso criará um acoplamento entre estes dois componentes. Acho que não preciso me aprofundar muito no caso para que você note o problema em código acoplado, certo?</p>
+<p>E como resolver este problema? E, sendo mais específico, como resolver este problema <em>em um app Angular</em>? Eu acredito que a solução seja usar algo semelhante à arquitetura flux, utilizando três conceitos: a) estado local intermediário, b) estado compartilhado persistente, e c) comunicação entre componentes.</p>
+<h3 id="estado-local-intermediário">Estado local intermediário</h3>
+<p>O primeiro passo é notar que estado local é algo não totalmente evitável. É bom, e saudável, evitar o máximo de estado local possível. O pessoal que usa o React que está lendo este post vai entender bem ao que me refiro. Enquanto o React tem <em>built-in</em> um sistema para gerenciamento de estado interno de um componente (vide <a href="https://facebook.github.io/react/docs/component-api.html#setstate" target="_blank" rel="external">setState</a>, o próprio Facebook sugere que você evite ao máximo o uso de armazenamento de estado dentro de um componente e favoreça o uso de <a href="https://preact.gitbooks.io/react-book/content/jsx/dumb.html" target="_blank" rel="external">componentes burros</a>).</p>
+<p>Porém as vezes é <em>necessário</em> armazenar um estado intermediário localmente. Quer um exemplo? Um componente de <em>accordion menu</em> onde mais de um menu pode estar aberto ao mesmo tempo. Em uma aplicação flux você pode muito bem manter os dados de qual menu está aberto dentro de uma <a href="https://facebook.github.io/flux/docs/overview.html#stores" target="_blank" rel="external"><em>store</em></a>, mas note que isso não é <em>dado</em> do sistema, não é necessariamente parte do <em>estado</em> do sistema, e pode ser armazenado localmente dentro do componente. Porém, desde que os dados sobre quais menus estão abertos não precisem ser compartilhados com outra parte do sistema, ou não sejam relevantes para o estado geral do sistema. Um outro exemplo, um pouco mais prático: dados de um formulário. Eu acredito que dados que serão enviados para o backend e processados devam ser mantidos locais internamente ao formulário até o momento de envio para o backend, sem armazenar os dados na(s) store(s).</p>
+<p>Sinceramente, eu acredito que este tipo de dado deva ser o <strong>único</strong> usado com <em>two-way data binding</em>. Entende o que eu digo? Já que é um dado local, fazer este binding de dados não vai vazar para o resto do sistema. Se, após algumas alterações locais, este dado precisar ser compartilhado com o resto do sistema e/ou persistido, ele será transformado em um estado compartilhado persistente (como é o caso dos formulários citado acima).</p>
+<h3 id="estado-compartilhado-persistente">Estado compartilhado persistente</h3>
+<p>Se você já desenvolveu ou mexeu com uma aplicação flux, saiba que este tipo de estado pode ser entendido como: dados que são salvos em uma store. Dados que fazem parte do <em>estado do sistema</em>.</p>
+<p>Por exemplo, digamos que você tem um campo onde o usuário pode editar o texto do mesmo à vontade, que nada mais se alterará no sistema, porém quando ele apertar <em>enter</em>, o conteúdo do campo deva ser exibido numa mensagem de boas vindas ao usuário no topo da página.</p>
+<p>No momento em que este dado é “publicado” para o resto da aplicação, ele deixa de ser um dado local temporário, e passa a ser um dado compartilhado persistente. De maneira análoga, ele deixa de estar dentro do <em>state</em> de um componente do React e passa a ser um dados que vai chegar ao componente em forma de <em>prop</em>.</p>
+<p>Mas como avisar o resto da aplicação sobre esta mudança? Bom, agora entra a parte mais importante do post: comunicação entre componentes.</p>
+<h3 id="comunicação-entre-componentes">Comunicação entre componentes</h3>
+<p>A comunicação entre os diferentes componentes da sua aplicação é o que dita o fluxo de dados da mesma. Ter vários <em>two-way data bindings</em> espalhados de maneira desorganizada no seu sistema tornará ele pouco manutenível e será pouco <em>debugável</em>. Isso fará com que analizar erros na sua aplicação seja bem mais difícil.</p>
+<p>Se você já tem experiência com React e flux, já deve ter pensado: <em>poxa, isso pode ser resolvido por um dispatcher</em>. E você está certo! Mas tem um detalhe.</p>
+<p>Usar um simples <em>dispatcher</em> ou <a href="https://nodejs.org/api/events.html" target="_blank" rel="external"><em>event emitter</em></a> no seu sistema Angular, apesar de funcionar, não é a melhor opção por causa do <a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$digest" target="_blank" rel="external"><code>$digest</code> loop</a> do Angular.</p>
+<p>O <em>digest loop</em> é a ordem em que as checagens, alterações, <em>watches</em> e renderizações são feitas <em>automaticamente</em> pelo Angular. É um ciclo que deve ser respeitado para manter o bom funcionamente e, principalmente, <strong>previsibilidade</strong> da sua aplicação. Se você já mexeu um pouco com Angular já deve ter se deparado com algum erro mais ou menos assim:</p>
+<blockquote>
+<p>Error: $digest already in progress</p>
+</blockquote>
+<p>Isso significa que o ciclo de <code>$digest</code> já estava em progresso e algo tentou iniciá-lo novamente. Acredite, este é um problema bem chato de identificar a causa as vezes, e que pode acabar acontecendo se você usar um <em>event emitter</em> comum na sua aplicação. Mas como usar algo parecido com um <em>dispatcher</em> e que respeite o <code>$digest</code>? A resposta é: usar o <code>$rootScope</code>!</p>
+<p>Toda aplicação Angular tem um escopo que é pai de todos os outros escopos, ele é chamado de <a href="https://docs.angularjs.org/api/ng/service/$rootScope" target="_blank" rel="external"><code>$rootScope</code></a>. Assim como qualquer outro escopo do Angular, ele possui os métodos <code>$on</code> e <code>$emit</code>, que é tudo que precisamos para construir um <em>event emitter</em> simples, rápido, e que respeita o <code>$digest</code>. Vamos lá? Veja um exemplo usando ES6:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> eventEmitterService = [</div><div class="line">  <span class="string">'$rootScope'</span>,</div><div class="line">  ($rootScope) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">on</span>: <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</div><div class="line">        $rootScope.$on(...args);</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">emit</span>: <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</div><div class="line">        $rootScope.$emit(...args);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">];</div><div class="line"></div><div class="line">app.factory(<span class="string">'eventEmitter'</span>, eventEmitterService);</div></pre></td></tr></table></figure>
+<p>Pronto! Simples, não? Pois é, agora você você consegue compartilhar os dados entre seus componentes (e factories, e services e tudo mais) de uma maneira organizada e permitir que outras partes do seu sistema possam esperar pela mudança. Sacou aqui a semelhança com o esquema de usar <em>actions</em> e <em>stores</em> do flux?</p>
+<p>Agora, no nosso exemplo ali do campo de texto, você pode ter um componente que tem um estado interno do conteúdo do campo e, quando o usuário pressionar <em>enter</em>, você usar o nosso event emitter para emitir o evento <code>TEXT_CHANGED</code> (ou algo do tipo) com o novo texto.</p>
+<p>E isto não precisa ser aplicado somente a textos. Em experiências recentes minhas com o Angular, eu fiz com que o <em>controller</em> da página de um post de blog ouvisse as modificações nos comentários daquele post. Assim, quando o usuário cria um novo comentário, ele é persistido no servidor e, quando a resposta de confirmação do servidor chega, eu emito um evento <code>ADD_COMMENT</code> que é ouvido pelo <em>controller</em> da página e ele atualiza a sessão de comentários sem ter que recarregar a página.</p>
+<p>Você pode ver um exemplo de como usar este <em>approach</em> na tag de data-flow do nosso <a href="https://github.com/talyssonoc/componentized-angular/tree/data-flow" target="_blank" rel="external">repositório de apoio</a>.</p>
+<p>Espero que tenham gostado, até a próxima!</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Angular-por-um-desenvolvedor-React/">Angular por um desenvolvedor React</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a><a href="/tags/react/">react</a><a href="/tags/flux/">flux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://talyssonoc.github.io/2015/12/14/Angular-por-um-desenvolvedor-React-2-Fluxo-de-dados/" data-title="Angular por um desenvolvedor React #2: Fluxo de dados | Talysson Oliveira" data-tsina="null" class="clearfix">
+		
+			<div class="addthis_sharing_toolbox"></div>
+  		
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/21/Angular-por-um-desenvolvedor-React-3-Eventos/" title="Angular por um desenvolvedor React #3: Eventos">
+  <strong>Anterior：</strong><br/>
+  <span>
+  Angular por um desenvolvedor React #3: Eventos</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/11/Links-da-semana-11-12-15/"  title="Links da semana 11/12/15">
+ <strong>Próximo：</strong><br/> 
+ <span>Links da semana 11/12/15
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Conteúdos</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#estado-local-intermediário"><span class="toc-number">1.</span> <span class="toc-text">Estado local intermediário</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#estado-compartilhado-persistente"><span class="toc-number">2.</span> <span class="toc-text">Estado compartilhado persistente</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comunicação-entre-componentes"><span class="toc-number">3.</span> <span class="toc-text">Comunicação entre componentes</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://github.com/talyssonoc" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://twitter.com/talyssonoc" target="_blank" title="Twitter">Twitter</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categorias</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Alternativas/" title="Alternativas">Alternativas<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Angular-por-um-desenvolvedor-React/" title="Angular por um desenvolvedor React">Angular por um desenvolvedor React<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Discussoes/" title="Discussões">Discussões<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Escolhendo-a-ferramenta-certa/" title="Escolhendo a ferramenta certa">Escolhendo a ferramenta certa<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Estudos/" title="Estudos">Estudos<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Indicando/" title="Indicando">Indicando<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Links-da-semana/" title="Links da semana">Links da semana<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Porque-e-importante/" title="Porque é importante?">Porque é importante?<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react/" title="react">react<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/flux/" title="flux">flux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby-on-rails/" title="ruby on rails">ruby on rails<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/reactjs/" title="reactjs">reactjs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linguagens/" title="linguagens">linguagens<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/meta-post/" title="meta-post">meta-post<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/intermediario/" title="intermediário">intermediário<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/talyssonoc" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/talyssonoc" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/talyssonoc" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Talysson">Talysson</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'talyssonoc';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-59249105-1', 'talyssonoc.github.io');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Topo"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-563c845c6aa3f350" async="async"></script>
+  </body>
+</html>
