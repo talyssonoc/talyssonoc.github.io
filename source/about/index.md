@@ -1,7 +1,7 @@
 title: Sobre
+date: 2016-10-23 23:47:22
 ---
-
-Olá! Meu nome é Talysson, tenho 23 anos, e no meio tempo entre criar trocadilhos ruins eu trabalho como desenvoledor front-end na [Codeminer42](http://codeminer42.com/).
+Olá! Meu nome é Talysson, tenho 24 anos, e no meio tempo entre criar trocadilhos ruins eu trabalho como desenvoledor na [Codeminer42](http://codeminer42.com/).
 
 Gosto bastante de JavaScript, novas tecnologias para desenvolvimento, ReactJS, aplicações isomórficas/universais e desenvolvimento ágil.
 

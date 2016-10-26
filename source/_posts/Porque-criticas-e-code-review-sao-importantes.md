@@ -15,11 +15,11 @@ Acontecimentos recentes me fizeram ficar pensando neste fato, com coisas que aco
 
 ### Esfriando a cabeça
 
-Atualmente estou trabalhando num projeto que possui bastante código legado, código que já passou pela mão de vários desenvolvedores, principalmente o front-end. Como todo código legado, há a tendência de encontrar uma certa quantidade de código não muito agradável, e isso por vezes me irrita, e me pego pensado "como foi que isso passou na revisão?!".
+Atualmente estou trabalhando num projeto que possui bastante código legado, código que já passou pela mão de vários desenvolvedores, principalmente o front-end. Como todo projeto legado, há a tendência de encontrar uma certa quantidade de código não muito agradável, e isso por vezes me irrita, e me pego pensado "como foi que isso passou na revisão?!".
 
-Depois de me espantar com esse tipo de coisa, tomei como uma missão pra mim passar a comentar mais em PRs ([_pull requests_](https://help.github.com/articles/using-pull-requests/)) que eu veja código propenso a problemas, para que, no futuro, quem mexer no código não passe pela mesma situação que eu.
+Depois de me espantar com esse tipo de coisa, tomei como uma missão pessoal passar a comentar mais em PRs ([_pull requests_](https://help.github.com/articles/using-pull-requests/)) que eu vejo código propenso a problemas, para que, no futuro, quem mexer no código não passe pela mesma situação que eu.
 
-As semanas passaram, e eis que recentemente uma PR minha foi bastante comentada, principalmente os códigos que envolviam back-end dela. E cada vez que eu arrumava algo, surgiam novas críticas, algumas mudanças que, pra mim, não faziam muito sentido, ou eram irrelevantes para a qualidade do código. E, posso dizer, isso também me irritou. Curioso, não?
+As semanas passaram, e eis que recentemente uma PR minha foi bastante comentada, principalmente os códigos que envolviam back-end. E cada vez que eu arrumava algo, surgiam novas críticas, algumas mudanças que, pra mim, não faziam muito sentido, ou eram irrelevantes para a qualidade do código. E, posso dizer, isso também me irritou. Curioso, não?
 
 Pois é, após ficar pensando porque tantos comentários, imaginando o que é que eu não estava enxergando de problema no código, cheguei a conclusão: os autores dos comentários tinham a mesma intenção que eu quando decidi ser mais ativo nos comentários para gerar códigos melhores, e se eu "desobedecesse" às sugestões eu só estaria gerando mais código ruim para o futuro, e talvez tenha sido isso o que aconteceu aos códigos que me irritaram anteriormente.
 
@@ -33,13 +33,11 @@ Acho que pelo item anterior você já pode sacar o porque de ser importante revi
 
 Para que isso funcione um dos passos essenciais é trabalhar com algum sistema de gerenciamento de versão e revisão, como o [Git](https://git-scm.com/), [Subversion](https://subversion.apache.org/), ou [Mercurial](https://www.mercurial-scm.org/), sendo o Git o mais conhecido deles. Este tipo de gerenciador permite que você crie "galhos" nas versões do seu código, tornando possível que programadores diferentes trabalhem com partes diferentes do código (ou até a mesma) sem que as mudanças de um afete o ambiente do outro, de modo que, quando alguém for revisar o seu código, ele consiga analisar isoladamente suas mudanças. O [Git Flow](http://danielkummer.github.io/git-flow-cheatsheet/) é um exemplo de como trabalhar seguindo este esquema.
 
-Após a adoção de uma ferramenta assim, usá-la corretamente e de suma importância, e com o tempo você colherá os frutos tendo códigos melhores.
-
-É importante lembrar a equipe de que isso não é uma burocracria criada para enrolar o projeto, e sim um filtro que permite diminuir a quantidade de bugs e códigos ruins que entrarão na _code base_ principal.
+É importante lembrar a equipe (e os _stakeholders_) de que isso não é uma burocracria criada para enrolar o projeto, e sim um filtro que permite diminuir a quantidade de bugs e códigos ruins que entrarão na _code base_ principal.
 
 ### Não seja um idiota
 
-Emprestando o tempo usado como título de códigos de condutas de conferências, a regra também deve se aplicar quando você está tendo seu código revisado/criticado ou revisando/criticando: não seja um idiota.
+Emprestando o termo usado como título de códigos de condutas em conferências, a regra também se aplica quando você está tendo seu código revisado/criticado ou revisando/criticando: não seja um idiota (do original em inglês: _don't be a jerk_).
 
 Inicialmente, que fique claro que não passei por nada do tipo em projetos recentes.
 
@@ -51,7 +49,11 @@ Se acha que está certo, tente provar seu ponto, comente com links, pesquisas de
 
 ### O código, não você
 
-E, por fim, é importante lembar que o que está sendo criticado é o código, não você. Raramente haverá comentários de cunho pessoal. A única coisa que te afetará é que, caso você aprenda algo com os comentários, não só o código melhorará, como você também. Então tente não esquentar com isso!
+E, por fim, é importante lembrar que o que está sendo criticado é o código, não você. Raramente haverá comentários de cunho pessoal. A única coisa que te afetará é que, caso você aprenda algo com os comentários, não só o código melhorará, como você também. Então tente não esquentar com isso!
+
+Leitura complementar:
+
+- [The Ten Commandments of Egoless Programming](https://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/)
 
 Fonte das imagens:
 
