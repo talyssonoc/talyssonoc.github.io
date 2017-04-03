@@ -22,7 +22,7 @@
 
 …">
 <meta property="og:image" content="http://talyssonoc.github.io/img/posts/separation.jpg">
-<meta property="og:updated_time" content="2017-04-03T04:49:05.408Z">
+<meta property="og:updated_time" content="2017-04-03T11:16:32.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NodeJS e boas práticas - separar conceitos não precisa ser chato">
 <meta name="twitter:description" content="Softwares tendem a mudar o tempo todo, e uma coisa que pode definir o quão bom é um código é justamente a facilidade que se tem para alterá-lo. Mas o que torna um código fácil de se dar manutenção?
@@ -135,14 +135,14 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; attributes &#125; = <span class="built_in">require</span>(<span class="string">'structure'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> User = attributes(&#123;</div><div class="line">  <span class="attr">id</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">name</span>: &#123;</div><div class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">    <span class="attr">required</span>: <span class="literal">true</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">age</span>: <span class="built_in">Number</span></div><div class="line">&#125;)(<span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">  isLegal() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.age &gt;= User.MIN_LEGAL_AGE;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">User.MIN_LEGAL_AGE = <span class="number">21</span>;</div></pre></td></tr></table></figure>
 <p>Repare que não incluí nesta lista os models do Backbone, nem bibliotecas como Sequelize e Mongoose, pois essas bibliotecas devem ser usadas na <em>camada de infraestrutura</em> para a comunicação com o exterior, e o resto da aplicação não precisa saber que estão sendo usadas.</p>
 <h4 id="nodejs-e-a-camada-de-aplicação">NodeJS e a camada de aplicação</h4>
-<p>Dado que seus casos de uso pertencem à <em>camada de aplicação</em> e que um caso de uso pode ter mais do que apenas “sucesso” e “falha” como resultado, um padrão utilizado com o Node que funciona bem para a implementação de casos de uso são os <a href="https://nodejs.org/api/events.html" target="_blank" rel="external"><em>event emitters</em></a>. Você pode fazer com que a classe do seu caso de uso estenda <code>EventEmitter</code> e emitir eventos para cada um dos resultados. Desta maneira no seu <em>controller</em> você só precisará executar o caso de uso e adicionar <em>listeners</em> pelos resultados, assim:</p>
+<p>Os casos de uso pertencem à <em>camada de aplicação</em> e podem ter mais do que apenas “sucesso” e “falha” como resultado (diferentemente das promises). Um padrão utilizado com o Node que funciona bem para casos assim são os <a href="https://nodejs.org/api/events.html" target="_blank" rel="external"><em>event emitters</em></a>. Você pode fazer com que a classe do seu caso de uso estenda <code>EventEmitter</code> e emitir eventos para cada um dos resultados. Desta maneira no seu <em>controller</em> você só precisará executar o caso de uso e adicionar <em>listeners</em> pelos resultados, assim:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CreateUser.js</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>);</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateUser</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(&#123; usersRepository &#125;) &#123;</div><div class="line">    <span class="keyword">super</span>();</div><div class="line">    <span class="keyword">this</span>.usersRepository = usersRepository;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  execute(userData) &#123;</div><div class="line">    <span class="keyword">const</span> user = <span class="keyword">new</span> User(userData);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.usersRepository</div><div class="line">      .add(user)</div><div class="line">      .then(<span class="function">(<span class="params">newUser</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.emit(<span class="string">'SUCCESS'</span>, newUser);</div><div class="line">      &#125;)</div><div class="line">      .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">if</span>(error.message === <span class="string">'ValidationError'</span>) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">this</span>.emit(<span class="string">'VALIDATION_ERROR'</span>, error);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.emit(<span class="string">'ERROR'</span>, error);</div><div class="line">      &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>O caso de uso realiza a separação dos dois tipos de erro que vem do <em>repository</em>, mas quem usa o caso de uso não precisa (nem deve) saber da existência do <code>usersRepository</code>.</p>
 <p>Desta forma, no seu <em>controller</em> você terá algo assim:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// UsersController</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> UsersController = &#123;</div><div class="line">  create(req, res) &#123;</div><div class="line">    <span class="keyword">const</span> createUser = <span class="keyword">new</span> CreateUser(&#123; usersRepository &#125;);</div><div class="line"></div><div class="line">    createUser</div><div class="line">      .on(<span class="string">'SUCCESS'</span>, (user) =&gt; &#123;</div><div class="line">        res.status(<span class="number">201</span>).json(user);</div><div class="line">      &#125;)</div><div class="line">      .on(<span class="string">'VALIDATION_ERROR'</span>, (error) =&gt; &#123;</div><div class="line">        res.status(<span class="number">400</span>).json(&#123;</div><div class="line">          <span class="attr">type</span>: <span class="string">'ValidationError'</span>,</div><div class="line">          <span class="attr">details</span>: error.details</div><div class="line">        &#125;);</div><div class="line">      &#125;)</div><div class="line">      .on(<span class="string">'ERROR'</span>, (error) =&gt; &#123;</div><div class="line">        res.sendStatus(<span class="number">500</span>);</div><div class="line">      &#125;);</div><div class="line"></div><div class="line">    createUser.execute(req.body.user);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// UsersController</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> UsersController = &#123;</div><div class="line">  create(req, res) &#123;</div><div class="line">    <span class="comment">// Leia abaixo sobre a parte de infraestrutura e injeção</span></div><div class="line">    <span class="comment">// de dependência para entender como esta instância será criada. </span></div><div class="line">    <span class="keyword">const</span> createUser = <span class="keyword">new</span> CreateUser(&#123; usersRepository &#125;);</div><div class="line"></div><div class="line">    createUser</div><div class="line">      .on(<span class="string">'SUCCESS'</span>, (user) =&gt; &#123;</div><div class="line">        res.status(<span class="number">201</span>).json(user);</div><div class="line">      &#125;)</div><div class="line">      .on(<span class="string">'VALIDATION_ERROR'</span>, (error) =&gt; &#123;</div><div class="line">        res.status(<span class="number">400</span>).json(&#123;</div><div class="line">          <span class="attr">type</span>: <span class="string">'ValidationError'</span>,</div><div class="line">          <span class="attr">details</span>: error.details</div><div class="line">        &#125;);</div><div class="line">      &#125;)</div><div class="line">      .on(<span class="string">'ERROR'</span>, (error) =&gt; &#123;</div><div class="line">        res.sendStatus(<span class="number">500</span>);</div><div class="line">      &#125;);</div><div class="line"></div><div class="line">    createUser.execute(req.body.user);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h4 id="nodejs-e-a-camada-de-infraestrutura">NodeJS e a camada de infraestrutura</h4>
-<p>A implementação da <em>camada de infraestrutura</em> geralmente é bem simples, só deve-se tomar cuidado para não vazar lógica desta camada para as superiores. Você pode, por exemplo, usar models do <a href="https://www.npmjs.com/package/sequelize" target="_blank" rel="external">Sequelize</a> para fazer a implementação de um <em>repository</em> que se comunica com um banco SQL, e dar ao <em>repository</em> métodos com nomes que não implicam a existência do SQL internamente, como o método <code>add</code> citado acima. Assim, uma parte da implementação de um <em>repository</em> com o Sequelize seria:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// UsersRepository.js</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UsersRepository</span> </span>&#123;</div><div class="line">  add(user) &#123;</div><div class="line">    <span class="keyword">const</span> &#123; valid, errors &#125; = user.validate();</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!valid) &#123;</div><div class="line">      <span class="keyword">const</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'ValidationError'</span>);</div><div class="line">      error.details = errors;</div><div class="line"></div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> UserModel</div><div class="line">      .create(user.attributes)</div><div class="line">      .then(<span class="function">(<span class="params">dbUser</span>) =&gt;</span> dbUser.dataValues);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A implementação da <em>camada de infraestrutura</em> costuma não apresentar grandes dificuldades, só deve-se tomar cuidado para não vazar lógica desta camada para as superiores. Você pode, por exemplo, usar models do <a href="https://www.npmjs.com/package/sequelize" target="_blank" rel="external">Sequelize</a> para fazer a implementação de um <em>repository</em> que se comunica com um banco SQL, e dar ao <em>repository</em> métodos com nomes que não implicam a existência do SQL internamente, como o método <code>add</code> citado acima. Assim, criaremos implementação de um <code>SequelizeUsersRepository</code>que será passado para quem depende do <em>repository</em> de usuários apenas como <code>usersRepository</code> que obedece a <em>interface</em> imaginária <code>UsersRepository</code>, de modo a não se saber da existência do Sequelize nas outras camadas. Segue um exemplo:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// SequelizeUsersRepository.js</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SequelizeUsersRepository</span> </span>&#123;</div><div class="line">  add(user) &#123;</div><div class="line">    <span class="keyword">const</span> &#123; valid, errors &#125; = user.validate();</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!valid) &#123;</div><div class="line">      <span class="keyword">const</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'ValidationError'</span>);</div><div class="line">      error.details = errors;</div><div class="line"></div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> UserModel</div><div class="line">      .create(user.attributes)</div><div class="line">      .then(<span class="function">(<span class="params">dbUser</span>) =&gt;</span> dbUser.dataValues);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>A ideia é a mesma para bancos de dados não relacionais, serviços de email, serviços de fila, APIs externas e afins.</p>
 <h4 id="nodejs-e-a-camada-de-interfaces-de-entrada">NodeJS e a camada de interfaces de entrada</h4>
 <p>Para esta camada existem várias possibilidades de implementação com Node. Para a entrada de requisições HTTP o <a href="https://npmjs.com/package/express" target="_blank" rel="external">Express</a> é o pacote mais usado, mas você pode usar também o <a href="https://www.npmjs.com/package/hapi" target="_blank" rel="external">Hapi</a> ou o <a href="https://www.npmjs.com/package/restify" target="_blank" rel="external">Restify</a>. No fim das contas esta escolha é só um detalhe de implementação, e mudá-la não deve afetar nenhuma das outras camadas (se migrar de Express para Hapi, por exemplo, causou mudanças em outras camadas da sua aplicação, é sinal de que há acoplamento entre elas!).</p>
@@ -173,7 +173,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/nodejs/">nodejs</a><a href="/tags/ddd/">ddd</a><a href="/tags/clean-architecture/">clean architecture</a>
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/nodejs/">nodejs</a><a href="/tags/ddd/">ddd</a><a href="/tags/clean-architecture/">clean architecture</a><a href="/tags/repository/">repository</a>
   </div>
 
 </div>
@@ -317,7 +317,7 @@
 			
 		
 			
-				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
 			
 		
 			
@@ -325,15 +325,11 @@
 			
 		
 			
+				<li><a href="/tags/mobile/" title="mobile">mobile<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/npm/" title="npm">npm<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/programacao-funcional/" title="programação funcional">programação funcional<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
 			
 		
 			
@@ -341,7 +337,7 @@
 			
 		
 			
-				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+				<li><a href="/tags/design-patterns/" title="design patterns">design patterns<sup>2</sup></a></li>
 			
 		
 			
@@ -353,27 +349,31 @@
 			
 		
 			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/react-native/" title="react native">react native<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/browserify/" title="browserify">browserify<sup>1</sup></a></li>
+				<li><a href="/tags/syntax-sugar/" title="syntax sugar">syntax sugar<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+				<li><a href="/tags/typescript/" title="typescript">typescript<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/babel/" title="babel">babel<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/automatizacao/" title="automatização">automatização<sup>1</sup></a></li>
+				<li><a href="/tags/iniciante/" title="iniciante">iniciante<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/backbonejs/" title="backbonejs">backbonejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
 			
 		
 		</ul>

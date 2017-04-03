@@ -149,6 +149,20 @@
     </url>
 
     <url>
+        <loc>http://talyssonoc.github.io/tags/front-end/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/tags/cordova/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://talyssonoc.github.io/tags/linux/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -164,20 +178,6 @@
 
     <url>
         <loc>http://talyssonoc.github.io/tags/grunt/</loc>
-        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://talyssonoc.github.io/tags/front-end/</loc>
-        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://talyssonoc.github.io/tags/cordova/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -226,14 +226,14 @@
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/tags/programacao-funcional/</loc>
+        <loc>http://talyssonoc.github.io/tags/mobile/</loc>
         <lastmod>2016-10-24T01:09:33.930Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/tags/mobile/</loc>
+        <loc>http://talyssonoc.github.io/tags/programacao-funcional/</loc>
         <lastmod>2016-10-24T01:09:33.930Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -381,28 +381,35 @@
 
     <url>
         <loc>http://talyssonoc.github.io/tags/javascript/</loc>
-        <lastmod>2017-04-03T04:49:05.408Z</lastmod>
+        <lastmod>2017-04-03T11:16:32.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://talyssonoc.github.io/tags/nodejs/</loc>
-        <lastmod>2017-04-03T04:49:05.408Z</lastmod>
+        <lastmod>2017-04-03T11:16:32.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://talyssonoc.github.io/tags/ddd/</loc>
-        <lastmod>2017-04-03T04:49:05.408Z</lastmod>
+        <lastmod>2017-04-03T11:16:32.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://talyssonoc.github.io/tags/clean-architecture/</loc>
-        <lastmod>2017-04-03T04:49:05.408Z</lastmod>
+        <lastmod>2017-04-03T11:16:32.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/tags/repository/</loc>
+        <lastmod>2017-04-03T11:16:32.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
