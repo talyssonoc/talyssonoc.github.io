@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://talyssonoc.github.io/2017/04/03/NodeJS-e-boas-praticas-separar-conceitos-nao-precisa-ser-chato/</loc>
+        <lastmod>2017-04-03T04:49:05.408Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://talyssonoc.github.io/2016/10/26/JavaScript-as-partes-desconhecidas/</loc>
         <lastmod>2016-10-26T03:16:19.769Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -111,7 +119,7 @@
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/2016/02/12/Links-da-semana-12-02-16/</loc>
+        <loc>http://talyssonoc.github.io/2015/11/12/Links-da-semana-12-11-15/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -119,7 +127,7 @@
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/2015/11/12/Links-da-semana-12-11-15/</loc>
+        <loc>http://talyssonoc.github.io/2016/02/12/Links-da-semana-12-02-16/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
