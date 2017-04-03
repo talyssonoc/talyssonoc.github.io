@@ -149,20 +149,6 @@
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/tags/front-end/</loc>
-        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://talyssonoc.github.io/tags/cordova/</loc>
-        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://talyssonoc.github.io/tags/linux/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -178,6 +164,20 @@
 
     <url>
         <loc>http://talyssonoc.github.io/tags/grunt/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/tags/front-end/</loc>
+        <lastmod>2016-10-24T01:09:33.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://talyssonoc.github.io/tags/cordova/</loc>
         <lastmod>2016-10-24T01:09:33.926Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -226,6 +226,13 @@
     </url>
 
     <url>
+        <loc>http://talyssonoc.github.io/tags/programacao-funcional/</loc>
+        <lastmod>2016-10-24T01:09:33.930Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://talyssonoc.github.io/tags/mobile/</loc>
         <lastmod>2016-10-24T01:09:33.930Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -233,7 +240,7 @@
     </url>
 
     <url>
-        <loc>http://talyssonoc.github.io/tags/programacao-funcional/</loc>
+        <loc>http://talyssonoc.github.io/tags/clojure-script/</loc>
         <lastmod>2016-10-24T01:09:33.930Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -269,13 +276,6 @@
 
     <url>
         <loc>http://talyssonoc.github.io/tags/ux/</loc>
-        <lastmod>2016-10-24T01:09:33.930Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://talyssonoc.github.io/tags/clojure-script/</loc>
         <lastmod>2016-10-24T01:09:33.930Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
