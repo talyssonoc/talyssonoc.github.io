@@ -21,6 +21,7 @@
   },
   "scripts": {
     "server": "hexo clean && hexo generate && hexo server -d",
-    "deploy": "hexo clean && hexo generate && hexo deploy"
+    "deploy": "hexo clean && hexo generate && hexo deploy",
+    "hexo": "hexo"
   }
 }
